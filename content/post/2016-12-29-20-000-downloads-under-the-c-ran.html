@@ -1,0 +1,139 @@
+---
+title: 20,000 downloads under the C(RAN)
+author: Zhian N. Kamvar
+date: '2016-12-29'
+slug: 20-000-downloads-under-the-c-ran
+categories:
+  - R
+  - grad school
+tags:
+  - poppr
+  - CRAN
+  - cranlogs
+---
+
+
+
+<p>My R package <a href="https://github.com/grunwaldlab/poppr#readme">poppr</a> hit over 20,000 downloads on <a href="https://CRAN.R-project.org/package=poppr">CRAN</a>. I thought this would be a nice opportunity to briefly talk about what initiated the development. Before that, let’s look at the cumulative number of downloads:</p>
+<div id="cran-you-dig-it" class="section level2">
+<h2>CRAN you dig it?</h2>
+<p>Thanks to the fantastic cranlogs package, assessing the download history of a package is quite simple (with the caveat that these are logs from the rstudio mirror, so the value is almost always lower than the true value). Here, I’ve created a graph that shows the cumulative number of downloads over the years, marking the times major, minor, and patch versions became available on CRAN<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<pre class="r"><code>library(&#39;cranlogs&#39;)
+library(&#39;ggplot2&#39;)
+library(&#39;ggthemes&#39;)
+library(&#39;lubridate&#39;)
+library(&#39;dplyr&#39;)
+
+releases &lt;- tibble::tribble(
+  ~version,                        ~date,  ~size,
+  &quot;1.0.0&quot;,  lubridate::ymd(&quot;2013-04-26&quot;),  &quot;2.5M&quot;,
+  &quot;1.0.1&quot;,  lubridate::ymd(&quot;2013-07-03&quot;),  &quot;2.5M&quot;,
+  &quot;1.0.3&quot;,  lubridate::ymd(&quot;2013-08-21&quot;),  &quot;2.5M&quot;,
+  &quot;1.0.4&quot;,  lubridate::ymd(&quot;2013-12-04&quot;),  &quot;2.7M&quot;,
+  &quot;1.0.5&quot;,  lubridate::ymd(&quot;2013-12-13&quot;),  &quot;2.4M&quot;,
+  &quot;1.0.6&quot;,  lubridate::ymd(&quot;2014-03-05&quot;),  &quot;2.9M&quot;,
+  &quot;1.1.0&quot;,  lubridate::ymd(&quot;2014-07-24&quot;),  &quot;1.9M&quot;,
+  &quot;1.1.1&quot;,  lubridate::ymd(&quot;2014-07-27&quot;),  &quot;1.9M&quot;,
+  &quot;1.1.2&quot;,  lubridate::ymd(&quot;2014-07-29&quot;),  &quot;1.8M&quot;,
+  &quot;1.1.3&quot;,  lubridate::ymd(&quot;2015-02-03&quot;),  &quot;1.9M&quot;,
+  &quot;1.1.4&quot;,  lubridate::ymd(&quot;2015-02-06&quot;),  &quot;1.9M&quot;,
+  &quot;1.1.5&quot;,  lubridate::ymd(&quot;2015-05-13&quot;),  &quot;1.4M&quot;,
+  &quot;2.0.0&quot;,  lubridate::ymd(&quot;2015-07-08&quot;),  &quot;2.1M&quot;,
+  &quot;2.0.1&quot;,  lubridate::ymd(&quot;2015-07-14&quot;),  &quot;2.1M&quot;,
+  &quot;2.0.2&quot;,  lubridate::ymd(&quot;2015-07-18&quot;),  &quot;2.1M&quot;,
+  &quot;2.1.0&quot;,  lubridate::ymd(&quot;2015-12-01&quot;),  &quot;2.7M&quot;,
+  &quot;2.1.1&quot;,  lubridate::ymd(&quot;2016-03-15&quot;),  &quot;2.7M&quot;,
+  &quot;2.2.0&quot;,  lubridate::ymd(&quot;2016-06-13&quot;),  &quot;2.4M&quot;,
+  &quot;2.2.1&quot;,  lubridate::ymd(&quot;2016-08-29&quot;),  &quot;3.8M&quot;,
+  &quot;2.3.0&quot;,  lubridate::ymd(&quot;2016-11-23&quot;),  &quot;4.0M&quot;
+)
+
+cols &lt;- RColorBrewer::brewer.pal(3, &quot;Set1&quot;)
+releases$type &lt;- with(releases, case_when(
+  gsub(&quot;(\\d).\\d.\\d&quot;, &quot;\\1.0.0&quot;, version) == version ~ &quot;major&quot;,
+  gsub(&quot;(\\d.\\d).\\d&quot;, &quot;\\1.0&quot;, version) == version ~ &quot;minor&quot;,
+  gsub(&quot;(\\d.\\d).\\d&quot;, &quot;\\1.0&quot;, version) != version ~ &quot;patch&quot;
+  ))
+
+x &lt;- cran_downloads(packages = &quot;poppr&quot;, from = &quot;2013-04-26&quot;, to = &quot;2016-12-28&quot;)
+x %&gt;% 
+  mutate(total = cumsum(count)) %&gt;%
+  ggplot(aes(y = total, x = date)) + 
+  geom_line(color = cols[2], size = 1.5) + 
+  geom_vline(aes(xintercept = date, alpha = type, linetype = type), 
+             data = releases, color = cols[1]) +
+  scale_alpha_discrete(range = c(1, 0.1)) +
+  theme_fivethirtyeight() +
+  theme(text = element_text(size = 16)) +
+  labs(list(title = &quot;Poppr downloads from CRAN&quot;,
+            alpha = &quot;Release&quot;,
+            lty = &quot;Release&quot;))</code></pre>
+<p><img src="/post/2016-12-29-20-000-downloads-under-the-c-ran_files/figure-html/unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>You can see above that I submitted a lot of patch versions early on, and even had to submit some within a few days of each other, but as time went along, I got better at making sensible release schedules. The rate of downloads is obviously increasing over time. How does the number of average daily downloads increase per year?</p>
+<pre class="r"><code>x %&gt;% 
+  mutate(year = lubridate::year(date)) %&gt;% 
+  group_by(year) %&gt;%
+  summarize(`Average downloads/day` = mean(count), `Variance` = var(count)) %&gt;%
+  knitr::kable(digits = 2)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">Average downloads/day</th>
+<th align="right">Variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">5.55</td>
+<td align="right">15.36</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">9.02</td>
+<td align="right">42.07</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">17.93</td>
+<td align="right">104.79</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">24.19</td>
+<td align="right">205.74</td>
+</tr>
+</tbody>
+</table>
+<p>You can see that while the mean is increasing, the variance also increases:</p>
+<pre class="r"><code>x %&gt;% 
+  mutate(year = lubridate::year(date)) %&gt;% 
+  ggplot(aes(x = count)) +
+  geom_histogram(binwidth = 5) +
+  facet_wrap(~year, ncol = 1, scale = &quot;free_y&quot;) +
+  theme_fivethirtyeight() +
+  ggtitle(&quot;Daily poppr downloads by year&quot;)</code></pre>
+<p><img src="/post/2016-12-29-20-000-downloads-under-the-c-ran_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="developing-poppr" class="section level2">
+<h2>Developing poppr</h2>
+<p>If someone told me five years ago that <a href="http://hdl.handle.net/1957/60042">my dissertation</a><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> would be centered around an R package I developed, I probably would not have believed them. I was just finishing my first term as a grad student and hadn’t even rotated into the <em>Phytophthora</em> lab. While I had SOME experience in R by way of my stats classes and had taught myself some rudimentary perl and BASH, I was no where near ready to write an R package. Asking me to write an R package was like asking me to build a car… blindfolded… with one arm tied behind my back… <a href="https://youtu.be/l7iVsdRbhnc">at a party</a>.</p>
+<p>You get the gist. When I started my rotation in the <em>Phytophthora</em> lab, my first task was to simulate populations of partially-clonal diploids and analyze the <a href="http://grunwaldlab.github.io/Population_Genetics_in_R/Linkage_disequilibrium.html">standardized index of association</a> to see how it behaved under different population genetic scenarios<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. I was able to get the simulations up and running in a couple of months after learning Python, but when it came time to analyze the data, the only program that could calculate the index of association was <a href="http://www.agapow.net/software/multilocus/">Multilocus</a>. At the time it was only possible to get this from third-party download sites and it could only run on Windows and OSX platforms. Once you were able to download this and run it, you could only analyze one data set at a time and <a href="https://peerj.com/articles/281/#table-6">it was slow</a><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. If I wanted to have any hope of completing this project, I had to find another way. My advisor suggested, “Why don’t you rewrite this analysis in R?” Without knowing any better, I tried it out and spent the next few weeks desperately trying to figure out how to implement the index of association in R.</p>
+<p>Eventually, my script worked and then the suggestion came: “You should make an R package out of this.” Serendipitously, Hadley Wickham was teaching an <a href="http://courses.had.co.nz/12-devtools/">R development masterclass</a> in June of 2012. Before I knew it, I was signed up for the course. After that, I began working on making the package that would eventually become <em>poppr</em>, relying heavily on the code for <a href="https://github.com/thibautjombart/adegenet"><em>adegenet</em></a> for inspiration. I presented a poster for version 0.2 at the <a href="http://www.fgsc.net/27thFGC/index.htm">27th Fungal Genetics Conference</a> in March 2013.</p>
+<blockquote>
+<p>While <em>poppr</em> is not the best name in the world, there were <a href="https://github.com/zkamvar/PiG_Multitool#whats-in-a-name">far worse suggestions</a>.</p>
+</blockquote>
+<p>After R had officially released version <a href="https://www.r-statistics.com/2013/04/r-3-0-0-is-released-whats-new-and-how-to-upgrade/">3.0.0</a> and the packages poppr depended upon finally were working again, I submitted to CRAN, but I didn’t get there in one try. I got a relatively tame email from Brian Ripley about the vignette and some examples running too long. After that, we made our first submission to a journal.</p>
+<p>The first two journals we submitted to rejected us right out (that is, three months after submission), so we revised a third draft and <a href="https://peerj.com/preprints/161/">submitted it as a pre-print</a> to PeerJ. After about a month, we got <a href="https://peerj.com/articles/281/reviews/">positive reviews with minor revisions</a>, and <a href="https://peerj.com/articles/281/">the paper</a> was published on March 4th, 2014. As of now, according to PeerJ, it has been cited over 100 times.</p>
+<p>All in all, <em>poppr</em> came out of being in the right place at the right time when both R and software development were becoming more accessible. It is still in existence because I make sure that it’s use-able and reliable. Tools like <a href="https://CRAN.R-project.org/package=devtools">devtools</a>, <a href="https://CRAN.R-project.org/package=roxygen2">roxygen2</a>, <a href="https://CRAN.R-project.org/package=testthat">testthat</a>, <a href="https://travis-ci.org">travis-ci</a>, and <a href="https://git-scm.com/">git</a> have made the development process so much easier. This, in turn gives me more time to focus on how people will actually use the software, which is important because if software is difficult to use, fewer people will want to use it.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See <a href="http://yihui.name/en/2013/06/r-package-versioning/" class="uri">http://yihui.name/en/2013/06/r-package-versioning/</a>. Major == breaking changes | Minor == new functions | Patch == bug fixes/documentation improvements<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Here’s a web version in case you don’t want to download the 192 page PDF ^_^ <a href="https://zkamvar.github.io/dissertation" class="uri">https://zkamvar.github.io/dissertation</a><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>This project eventually became the fifth chapter in my dissertation <a href="https://zkamvar.github.io/dissertation/5-factors-influencing-inference-of-clonality-in-diploid-populations.html" class="uri">https://zkamvar.github.io/dissertation/5-factors-influencing-inference-of-clonality-in-diploid-populations.html</a><a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>The most recent version of the program has sped up considerably and is now open source <a href="https://github.com/agapow/multilocus" class="uri">https://github.com/agapow/multilocus</a><a href="#fnref4">↩</a></p></li>
+</ol>
+</div>

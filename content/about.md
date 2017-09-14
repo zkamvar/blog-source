@@ -3,4 +3,51 @@ title: "About"
 date: "2016-05-05T21:48:51-07:00"
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium-theme).
+> Note: this is currently under construction
+
+
+Science
+-------
+
+I am currently a post-doctoral researcher in the lab of [Sydney E. Everhart][see] at the [Department of Plant Pathology at University of Nebraska, Lincoln][unl]. My work focuses on using reproducible methods to understand the population genetics of clonal organisms. 
+
+My Ph. D. is from the [Department of Botany and Plant
+Pathology][bpp] at [Oregon State University][osu]. [My dissertation][diss]
+focuses on my development of computational tools for analyzing clonal
+populations in the R package [poppr][poppr].
+
+Radio
+-----
+
+In January of 2012, [Joey Hulbert][joey] and I began interviewing graduate
+students at OSU about the inspiration for their research. This developed into
+the [award-winning][awd] radio program [Inspiration Dissemination][id] on OSU's
+student-run radio station, [KBVR][kbvr] (88.7 FM).
+
+Our mission is to engage and inspire undergraduates to pursue graduate research
+by sharing the personal stories of graduate students at OSU each week. 
+
+Interests
+----
+
+Beyond Science and Communication, these are a few of my favorite things
+(incomplete list in no particular order):
+
+ - listening to and playing music (I enjoy [several forms][lastfm])
+ - baking
+ - cats
+ - science fiction and literature
+
+
+
+[bpp]: http://bpp.oregonstate.edu/
+[osu]: http://oregonstate.edu/
+[poppr]: https://github.com/grunwaldlab/poppr#readme
+[awd]: http://blogs.oregonstate.edu/muatosu/2014/03/10/oregon-state-universitys-kbvr-fm-wins-national-award/
+[id]:  http://blogs.oregonstate.edu/inspiration
+[kbvr]: http://www.orangemedianetwork.com/kbvr_fm/
+[lastfm]: http://www.last.fm/user/DJPoopslice
+[joey]: http://jmhulbert.me/
+[diss]: https://zkamvar.github.io/dissertation
+[see]: http://plantpathology.unl.edu/sydney-everhart
+[unl]: http://plantpathology.unl.edu/

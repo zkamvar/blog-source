@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cranlogs on Zhian N. Kamvar</title>
+    <link>/tags/cranlogs/</link>
+    <description>Recent content in Cranlogs on Zhian N. Kamvar</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/cranlogs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>20,000 downloads under the C(RAN)</title>
+      <link>/2016/12/29/20-000-downloads-under-the-c-ran/</link>
+      <pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/12/29/20-000-downloads-under-the-c-ran/</guid>
+      <description>My R package poppr hit over 20,000 downloads on CRAN. I thought this would be a nice opportunity to briefly talk about what initiated the development. Before that, let’s look at the cumulative number of downloads:
+CRAN you dig it? Thanks to the fantastic cranlogs package, assessing the download history of a package is quite simple (with the caveat that these are logs from the rstudio mirror, so the value is almost always lower than the true value).</description>
+    </item>
+    
+  </channel>
+</rss>
