@@ -14,7 +14,7 @@ publishDir = "../zkamvar.github.io"
     name = "About"
     url = "/about/"
 [[menu.main]]
-    name = "Ph. D. Dissertation"
+    name = "Dissertation"
     url = "https://zkamvar.github.io/dissertation"
 [[menu.main]]
     name = "GitHub"
@@ -36,7 +36,7 @@ publishDir = "../zkamvar.github.io"
     MathJaxVersion = "2.7.1"
 
     [params.logo]
-    url = "logo.png"
+    url = "znk.png"
     width = 50
     height = 50
     alt = "Logo"
