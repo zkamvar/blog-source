@@ -53,13 +53,7 @@
             <div class="social-entries">
 
               <div class="social-entry">
-                <i class="fa fa-envelope fa-fw"></i>&nbsp;{{ .email }}
-              </div>
-              <div class="social-entry">
-                <i class="fa fa-mobile fa-fw"></i>&nbsp;{{ .mobile }}
-              </div>
-              <div class="social-entry">
-                <a href="https://twitter.com/{{ .twitter }}"><i class="fa fa-twitter fa-fw"></i>{{ .twitter }}</a>
+                <a href="https://twitter.com/{{ .twitter }}"><i class="fa fa-twitter fa-fw"></i>@{{ .twitter }}</a>
               </div>
               <div class="social-entry">
                 <a href="https://github.com/{{ .github }}"><i class="fa fa-github fa-fw"></i>{{ .github }}</a>
@@ -80,6 +74,12 @@
                 <a href="https://www.youtube.com/channel/{{ .youtube }}"><i class="fa fa-youtube fa-fw"></i>{{ .youtube }}</a>
               </div> 
 -->
+              <div class="social-entry">
+                <i class="fa fa-envelope fa-fw"></i>&nbsp;{{ .email }}
+              </div>
+              <div class="social-entry">
+                <i class="fa fa-mobile fa-fw"></i>&nbsp;{{ .mobile }}
+              </div>
             </div>
             {{ end }}
 
