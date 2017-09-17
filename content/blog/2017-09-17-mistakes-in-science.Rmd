@@ -1,0 +1,162 @@
+---
+title: Mistakes in Science
+author: Zhian N. Kamvar
+date: '2017-09-17'
+slug: mistakes-in-science
+categories:
+  - R
+  - science
+tags:
+  - poppr
+  - bruvo
+  - algorithms
+---
+
+```{r setup, echo = FALSE, include = FALSE}
+knitr::opts_chunk$set(fig.height = 5, 
+                      fig.width = 7, 
+                      out.width = "100%", 
+                      fig.align = "center", 
+                      dpi = 150,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
+```{r echo=FALSE, cache=TRUE, results='hide'}
+# Published data from Bruvo et al 2004 (with extra zeroes)
+# 
+tg <- structure(c(0L, 0L, 0L, 20L, 20L, 24L, 23L, 26L, 24L, 43L), 
+                .Dim = c(2L, 5L), .Dimnames = list(c("1", "2"), NULL))
+tg1 <- tg
+
+# Comparison function
+amat <- function(a1, a2) 1 - 2^(-abs(a1 - a2))
+
+# Create the Distance Matrix
+
+distmat <- function(allmat){
+  n     <- ncol(allmat)
+  pairs <- expand.grid(allmat[1, ], allmat[2, ]) 
+  mat   <- matrix(apply(pairs, 1, function(x) amat(x[1], x[2])), n, n)
+  # Infinite model accounted for here
+  mat[allmat[1, ] == "0", ] <- 1
+  mat[, allmat[2, ] == "0"] <- 1
+  dimnames(mat) <- list(allmat[1, ], allmat[2, ])
+  mat
+}
+# Calculate distance between two samples
+brvo <- function(allmat){
+  n     <- ncol(allmat)
+  rows  <- seq(n)
+  mat   <- distmat(allmat)
+  perms <- matrix(.Call("permuto", n, PACKAGE = "poppr") + 1, nrow = n) 
+  walks <- apply(perms, 2, function(i) mean(mat[matrix(c(rows, i), ncol = 2)]))
+  min(walks)
+}
+
+# Calculate distance between two samples with different models
+Rbruvo <- function(dat, add = TRUE, loss = TRUE, old_model = FALSE){
+  dat <- t(apply(dat, 1, sort))
+  dat <- dat[, colSums(dat, na.rm = TRUE) > 0]
+  if (!add & !loss){
+    return(brvo(dat))
+  } 
+  nzeroes <- rowSums(dat == 0)
+  zeroes  <- which.max(nzeroes)
+  repls   <- seq(nzeroes[zeroes])
+  zlocat  <- dat[zeroes, ] == 0
+  mloss   <- 0
+  madd    <- 0
+  if (loss){
+    donor    <- which.min(nzeroes)
+    combs    <- lapply(repls, function(i) dat[donor, ]) 
+    combs    <- do.call(expand.grid, combs)
+    combs    <- t(apply(combs, 1, sort))
+    combs    <- if (old_model) unique(combs) else combs
+    combs    <- if (nrow(combs) == 1) t(combs) else combs
+    losslist <- vector(mode = "list", length = nrow(combs))
+    for (i in seq(nrow(combs))){
+      losslist[[i]] <- dat
+      losslist[[i]][zeroes, repls] <- combs[i, ]
+    }
+    mloss <- sum(vapply(losslist, brvo, numeric(1)))/length(losslist)
+  }
+  if (add){
+    combs   <- lapply(repls, function(i) dat[zeroes, !zlocat]) 
+    combs   <- do.call(expand.grid, combs)
+    combs   <- t(apply(combs, 1, sort))
+    combs   <- if (old_model) unique(combs) else combs
+    combs   <- if (nrow(combs) == 1) t(combs) else combs
+    addlist <- vector(mode = "list", length = nrow(combs))
+    for (i in seq(nrow(combs))){
+      addlist[[i]] <- dat
+      addlist[[i]][zeroes, zlocat] <- combs[i, ]
+    }
+    madd <- sum(vapply(addlist, brvo, numeric(1)))/length(addlist)
+  }
+  
+  (mloss + madd)/(sum(c(mloss, madd) > 0L))
+}
+
+```
+
+
+As I was preparing to push a [new version of poppr](https://github.com/grunwaldlab/poppr/releases/tag/v.2.5.0) to CRAN 
+, this tweet (appropriately) came across my feed last week:
+
+`r blogdown::shortcode("tweet 906959242724179968")`
+
+In short, the reason I was updating poppr was to fix a mistake I had made a few years ago in my assumptions about how to calculate [Bruvo's genetic distance](https://www.ncbi.nlm.nih.gov/pubmed/15189230) for partial heterozygotes. 
+
+Background
+----------
+
+### Calculation of Bruvo's distance
+
+Bruvo's distance is used for micrsatellite markers assuming a stepwise mutation model. Between any two alleles the distance, $d$, is
+
+$$
+d = 1 - 2^{-|x|}
+$$
+
+where $x$ is the number of repeat units between the alleles. For example, if you have two alleles, 420 and 428 with a repeat motif of ACAT, then they would represent (ACAT)$_{105}$ and (ACAT)$_{107}$, respectively, which would result in a distance of 0.75.
+
+This gets more complicated when you increase the ploidy, because then you must find the minimum average distance among all the alleles. In practice, this involves creating a matrix of Bruvo's distance for all alleles. So, for example, if you had the following alleles in two tetraploid samples:
+
+```{r, echo = FALSE}
+ex <- tg[2:1, -1]
+ex[1, ] <- sort(ex[1, ])
+ex[2, 1] <- 30
+ex[2, ] <- sort(ex[2, ])
+rownames(ex) <- c("genotype 2:", "genotype 1:")
+knitr::kable(ex[2:1, ])
+```
+
+The resulting genotype matrix would look like this:
+
+```{r, echo = FALSE}
+knitr::kable(distmat(ex), digits = 4, align = "c")
+```
+
+If you take the average of the diagonal, you end up with `r signif(mean(diag(distmat(ex))), 4)`. However, if we switch columns 2 and 3 in the above matrix, we find that the average is `r signif(mean(diag(distmat(ex)[, c(1, 3, 2, 4)])), 4)`. If we were to try all possible combinations of rearranging these columns and calcuating the mean of the diagonal, we find that this is the minimum value. Because of this, **order of alleles does not matter when calculating Bruvo's distance.** This fact becomes important in just a little bit. 
+
+### Polyploid problem: partial heterozygotes
+
+Of course, this is assuming that all alleles are known, but the problem with polyploids is that it is often difficult to accurately score genotypes that are only partially heterozygotic, so Bruvo came up with a solution where all possible combinations of the observed alleles are used to fill the missing genotypes as demonstrated in figure 1 of the publication:
+
+![Figure 1 from Bruvo et al. 2004](../../img/bruvofig.png){width=100%}
+
+This figure is a bit confusing to look at, but what it's demonstrating is that if you weren't able to score that "30" allele, you would be comparing three alleles against four. To compensate, you could do one of four things:
+
+1. Replace the allele with the three known alleles in that genotype (b)
+2. Replace the allele with the four known alleles of the other genotype (c)
+3. Replace the allele with infinity (d)
+4. Do 1 and 2 and average the results. 
+
+In calculating 1, 2, and 4, you must consider all possible combinations to 
+fill the missing allele. Luckily, when you only have one allele missing, all possible combinations amounts to the number of alleles observed. However, when
+you have more than one ambiguous allelic state, the question becomes, do you consider all possible ordered combinations of alleles, of which there are *n*^*k*^ where *n* is the number of observed alleles and *k*, the number of ambiguous alleles or all possible unorderd combinations, of which there are ${n+k-1}\choose{k}$ combinations.
+
+
+

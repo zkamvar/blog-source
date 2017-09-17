@@ -11,7 +11,7 @@ googleAnalytics = "UA-60561808-1"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 # Define the number of posts per page
 paginate = 10
-publishDir = "../zkamvar.github.io"
+publishDir = "../dev"
 
 [menu]
 

@@ -1,0 +1,108 @@
+---
+title: Mistakes in Science
+author: Zhian N. Kamvar
+date: '2017-09-17'
+slug: mistakes-in-science
+categories:
+  - R
+  - science
+tags:
+  - poppr
+  - bruvo
+  - algorithms
+---
+
+
+
+<p>As I was preparing to push a <a href="https://github.com/grunwaldlab/poppr/releases/tag/v.2.5.0">new version of poppr</a> to CRAN , this tweet (appropriately) came across my feed last week:</p>
+{{% tweet 906959242724179968 %}}
+<p>In short, the reason I was updating poppr was to fix a mistake I had made a few years ago in my assumptions about how to calculate <a href="https://www.ncbi.nlm.nih.gov/pubmed/15189230">Bruvo’s genetic distance</a> for partial heterozygotes.</p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<div id="calculation-of-bruvos-distance" class="section level3">
+<h3>Calculation of Bruvo’s distance</h3>
+<p>Bruvo’s distance is used for micrsatellite markers assuming a stepwise mutation model. Between any two alleles the distance, <span class="math inline">\(d\)</span>, is</p>
+<p><span class="math display">\[
+d = 1 - 2^{-|x|}
+\]</span></p>
+<p>where <span class="math inline">\(x\)</span> is the number of repeat units between the alleles. For example, if you have two alleles, 420 and 428 with a repeat motif of ACAT, then they would represent (ACAT)<span class="math inline">\(_{105}\)</span> and (ACAT)<span class="math inline">\(_{107}\)</span>, respectively, which would result in a distance of 0.75.</p>
+<p>This gets more complicated when you increase the ploidy, because then you must find the minimum average distance among all the alleles. In practice, this involves creating a matrix of Bruvo’s distance for all alleles. So, for example, if you had the following alleles in two tetraploid samples:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">genotype 1:</td>
+<td align="right">20</td>
+<td align="right">23</td>
+<td align="right">24</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">genotype 2:</td>
+<td align="right">20</td>
+<td align="right">24</td>
+<td align="right">26</td>
+<td align="right">43</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting genotype matrix would look like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">20</th>
+<th align="center">23</th>
+<th align="center">24</th>
+<th align="center">30</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20</td>
+<td align="center">0.0000</td>
+<td align="center">0.875</td>
+<td align="center">0.9375</td>
+<td align="center">0.9990</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td align="center">0.9375</td>
+<td align="center">0.500</td>
+<td align="center">0.0000</td>
+<td align="center">0.9844</td>
+</tr>
+<tr class="odd">
+<td>26</td>
+<td align="center">0.9844</td>
+<td align="center">0.875</td>
+<td align="center">0.7500</td>
+<td align="center">0.9375</td>
+</tr>
+<tr class="even">
+<td>43</td>
+<td align="center">1.0000</td>
+<td align="center">1.000</td>
+<td align="center">1.0000</td>
+<td align="center">0.9999</td>
+</tr>
+</tbody>
+</table>
+<p>If you take the average of the diagonal, you end up with 0.5625. However, if we switch columns 2 and 3 in the above matrix, we find that the average is 0.4687. If we were to try all possible combinations of rearranging these columns and calcuating the mean of the diagonal, we find that this is the minimum value. Because of this, <strong>order of alleles does not matter when calculating Bruvo’s distance.</strong> This fact becomes important in just a little bit.</p>
+</div>
+<div id="polyploid-problem-partial-heterozygotes" class="section level3">
+<h3>Polyploid problem: partial heterozygotes</h3>
+<p>Of course, this is assuming that all alleles are known, but the problem with polyploids is that it is often difficult to accurately score genotypes that are only partially heterozygotic, so Bruvo came up with a solution where all possible combinations of the observed alleles are used to fill the missing genotypes as demonstrated in figure 1 of the publication:</p>
+<div class="figure">
+<img src="../../img/bruvofig.png" alt="Figure 1 from Bruvo et al. 2004" style="width:100.0%" />
+<p class="caption">Figure 1 from Bruvo et al. 2004</p>
+</div>
+<p>This figure is a bit confusing to look at, but what it’s demonstrating is that if you weren’t able to score that “30” allele, you would be comparing three alleles against four. To compensate, you could do one of four things:</p>
+<ol style="list-style-type: decimal">
+<li>Replace the allele with the three known alleles in that genotype (b)</li>
+<li>Replace the allele with the four known alleles of the other genotype (c)</li>
+<li>Replace the allele with infinity (d)</li>
+<li>Do 1 and 2 and average the results.</li>
+</ol>
+<p>In calculating 1, 2, and 4, you must consider all possible combinations to fill the missing allele. Luckily, when you only have one allele missing, all possible combinations amounts to the number of alleles observed. However, when you have more than one ambiguous allelic state, the question becomes, do you consider all possible ordered combinations of alleles, of which there are <em>n</em><sup><em>k</em></sup> where <em>n</em> is the number of observed alleles and <em>k</em>, the number of ambiguous alleles or all possible unorderd combinations, of which there are <span class="math inline">\({n+k-1}\choose{k}\)</span> combinations.</p>
+</div>
+</div>
