@@ -4,6 +4,10 @@ Zhian Kamvar's Personal Page
 This site was developed using [blogdown] and [Hugo] and is hosted at <https://zkamvar.github.io>. The theme is based on the [universal] theme with
 tweaks from [Romain François]' website.
 
+
+Building the site
+-----------------
+
 To render this site, you will need blogdown and hugo. You can do this from within R
 
 ```r
@@ -16,6 +20,12 @@ Once everything is installed, you can run:
 ```r
 blogdown::serve_site()
 ```
+
+Comments
+--------
+
+The site's comments are available via <https://hypothes.is/>
+
 
 [Romain François]: https://github.com/rbind/romain
 [blogdown]: https://bookdown.org/yihui/blogdown/
