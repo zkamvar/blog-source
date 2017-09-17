@@ -11,6 +11,7 @@ googleAnalytics = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 # Define the number of posts per page
 paginate = 10
+publishDir = "../dev"
 
 [menu]
 
