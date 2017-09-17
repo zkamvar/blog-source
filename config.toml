@@ -23,7 +23,7 @@ paginate = 10
 
 [[menu.main]]
     name = "Blog"
-    url  = "/blog/"
+    url  = "/post/"
     weight = 2
 
 # Top bar social links menu
@@ -47,7 +47,7 @@ paginate = 10
     pre = "<i class='fa fa-2x fa-envelope'></i>"
 
 [params]
-    viewMorePostLink = "/blog/"
+    viewMorePostLink = "/post/"
     author = "Zhian N. Kamvar"
     defaultKeywords = ["r"]
     defaultDescription = "Zhian N. Kamvar"
@@ -95,7 +95,7 @@ paginate = 10
     longitude = "-77.028333"
 
 [Permalinks]
-    blog = "/blog/:year/:month/:day/:filename/"
+    post = "/post/:year/:month/:day/:slug/"#"/blog/:year/:month/:day/:filename/"
     
 [params.social]
     twitter = "zkamvar"
