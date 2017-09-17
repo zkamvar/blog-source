@@ -26,6 +26,11 @@ paginate = 10
     url  = "/post/"
     weight = 2
 
+[[menu.main]]
+    name = "About"
+    url  = "/about"
+    weight = 3
+
 # Top bar social links menu
 
 [[menu.topbar]]
@@ -158,5 +163,5 @@ paginate = 10
 
 [params.recent_posts]
     enable = true
-    title = "From my blog"
+    title = "blog"
     subtitle = "Most of the posts will have something to do with R, population genetics, reproducibility, or academia"
