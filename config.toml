@@ -24,7 +24,7 @@ publishDir = "../dev"
 
 [[menu.main]]
     name = "Blog"
-    url  = "/post/"
+    url  = "/blog/"
     weight = 2
 
 [[menu.main]]
@@ -53,7 +53,7 @@ publishDir = "../dev"
     pre = "<i class='fa fa-2x fa-envelope'></i>"
 
 [params]
-    viewMorePostLink = "/post/"
+    viewMorePostLink = "/blog/"
     author = "Zhian N. Kamvar"
     defaultKeywords = ["r"]
     defaultDescription = "Zhian N. Kamvar"
@@ -81,13 +81,13 @@ publishDir = "../dev"
     # Enable the contact form by entering your Formspree.io email
     email = "your@email.com"
 
-    about_us = "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>"
+    about_us = "<p>I am a population geneticist, data scientist, plant pathologist, and R package developer working at the University of Nebraska-Lincoln.</p>"
     # copyright = "Copyright (c) 2015 - 2016, YourCompany; all rights reserved."
 
     # Format dates with Go's time formatting
     date_format = "2006-01-02"
 
-    logo = "images/znk.png"
+    logo = "img/logo.png"
     address = """<p><strong>Universal Ltd.</strong>
         <br>13/25 New Avenue
         <br>Newtown upon River
@@ -101,7 +101,7 @@ publishDir = "../dev"
     longitude = "-77.028333"
 
 [Permalinks]
-    post = "/post/:year/:month/:day/:slug/"#"/blog/:year/:month/:day/:filename/"
+    post = "/blog/:year/:month/:day/:slug/"#"/blog/:year/:month/:day/:filename/"
     
 [params.social]
     twitter = "zkamvar"
@@ -164,5 +164,5 @@ publishDir = "../dev"
 
 [params.recent_posts]
     enable = true
-    title = "blog"
+    title = "My Blog"
     subtitle = "Most of the posts will have something to do with R, population genetics, reproducibility, or academia"
