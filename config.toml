@@ -1,5 +1,5 @@
 baseurl = "https://zkamvar.github.io/"
-title = "Universal"
+title = "Zhian N. Kamvar"
 theme = "hugo-universal-theme"
 languageCode = "en-us"
 # Site language. Available translations in the theme's `/i18n` directory.
@@ -11,7 +11,7 @@ googleAnalytics = "UA-60561808-1"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 # Define the number of posts per page
 paginate = 10
-publishDir = "../dev"
+publishDir = "../zkamvar.github.io"
 
 [menu]
 
@@ -88,17 +88,17 @@ publishDir = "../dev"
     date_format = "2006-01-02"
 
     logo = "img/logo.png"
-    address = """<p><strong>Universal Ltd.</strong>
-        <br>13/25 New Avenue
-        <br>Newtown upon River
-        <br>45Y 73J
-        <br>England
-        <br>
-        <strong>Great Britain</strong>
-      </p>
-      """
-    latitude = "-12.043333"
-    longitude = "-77.028333"
+#    address = """<p><strong>Universal Ltd.</strong>
+#        <br>13/25 New Avenue
+#        <br>Newtown upon River
+#        <br>45Y 73J
+#        <br>England
+#        <br>
+#        <strong>Great Britain</strong>
+#      </p>
+#      """
+#    latitude = "-12.043333"
+#    longitude = "-77.028333"
 
 [Permalinks]
     post = "/blog/:year/:month/:day/:slug/"#"/blog/:year/:month/:day/:filename/"
