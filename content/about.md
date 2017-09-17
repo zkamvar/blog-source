@@ -1,5 +1,6 @@
 ---
 title: "About"
+date: "2017-09-16"
 ---
 
 <img src="/images/meep.jpg" width=225 align="left" style="margin:0px 10px 0px 0px"> I am a computational biologist currently working a post-doctoral researcher in the lab of [Dr. Sydney E. Everhart][see] at the [Department of Plant Pathology at University of Nebraska-Lincoln][unl]. My research focus seeks to understand the mechanisms that drive the evolution of clonal plant pathogens. 
