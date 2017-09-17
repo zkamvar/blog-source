@@ -21,6 +21,7 @@
             <div class="blog-entries">
                 {{ range first 3 (where .Site.Pages "Type" "blog") }}
                 <div class="item same-height-row clearfix">
+<!-- ZNK: I don't need the images showing up in the footer. Text is fine.
                     <div class="image same-height-always">
                         <a href="{{ .Permalink }}">
                           {{ if isset .Params "banner" }}
@@ -30,6 +31,7 @@
                           {{ end }}
                         </a>
                     </div>
+-->
                     <div class="name same-height-always">
                         <h5><a href="{{ .Permalink }}">{{ .Title }}</a></h5>
                     </div>
