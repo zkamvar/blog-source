@@ -17,8 +17,7 @@ Grünwald NJ, Larsen MM, **Kamvar ZN**, Reeser PW, Kanaskie A, Laine J, Wiese R 
 
 **Kamvar ZN**, Larsen MM, Kanaskie AM, Hansen EM, and Grünwald NJ. (2015) Spatial and temporal analysis of populations of the sudden oak death pathogen in Oregon forests. *Phytopathology.* 105:7 982-989. doi: [10.1094/PHYTO-12-14-0350-FI.](https://doi.org/10.1094/PHYTO-12-14-0350-FI.)
 
-Weiland JE, Garrido PA, **Kamvar ZN**, Marek SM, Grünwald NJ, and Garzón CD. (2015) Population structure of *Pythium irregulare*, *P. sylvaticum*, and *P. ultimum* in forest nursery soils of Oregon and Washington. *Phytopathology.* 105:5 684-694. doi:
-10.1094/PHYTO-05-14-0147-R
+Weiland JE, Garrido PA, **Kamvar ZN**, Marek SM, Grünwald NJ, and Garzón CD. (2015) Population structure of *Pythium irregulare*, *P. sylvaticum*, and *P. ultimum* in forest nursery soils of Oregon and Washington. *Phytopathology.* 105:5 684-694. doi: [10.1094/PHYTO-05-14-0147-R](https://doi.org/10.1094/PHYTO-05-14-0147-R)
 
 **Kamvar ZN**, Tabima JF, Grünwald NJ. (2014) *Poppr*: an R package for genetic analysis of populations with clonal, partially clonal, and/or sexual reproduction. *PeerJ* 2: e281. doi: [10.7717/peerj.281](https://doi.org/10.7717/peerj.281)
 
