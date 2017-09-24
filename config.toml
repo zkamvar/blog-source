@@ -32,6 +32,11 @@ publishDir = "../dev"
     url  = "/about"
     weight = 3
 
+[[menu.main]]
+    name = "Publications"
+    url  = "/pubs"
+    weight = 4
+
 # Top bar social links menu
 
 [[menu.topbar]]
