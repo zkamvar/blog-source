@@ -1,8 +1,8 @@
 ---
-title: Mistakes in Science
+title: Squishing a big bad bug
 author: Zhian N. Kamvar
 date: '2017-09-17'
-slug: mistakes-in-science
+slug: squish
 categories:
   - R
   - science
@@ -97,7 +97,7 @@ head(trials)</code></pre>
 <pre class="r"><code>res        &lt;- table(rowSums(trials))
 names(res) &lt;- c(&quot;TT&quot;, &quot;HT&quot;, &quot;HH&quot;)
 barplot(res, col = &quot;violet&quot;)</code></pre>
-<p><img src="/blog/2017-09-17-mistakes-in-science_files/figure-html/coins-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/blog/2017-09-23-squish_files/figure-html/coins-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="the-problem" class="section level2">
 <h2>The Problem</h2>
@@ -145,7 +145,9 @@ barplot(res, col = &quot;violet&quot;)</code></pre>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
-<p>Mistakes in scientific software are commonplace. The very <a href="https://github.com/grunwaldlab/poppr/issues/1">first bug discovered in poppr</a> was discovered in 2014, there have been many more since, and there will be more as time goes on. When I find a mistake in <em>poppr</em>, I do what I would hope any other developer would do: I fix the mistake 🐛🔨, make a note that I fixed it 📝, and write a test to make sure the mistake never happens again 💻 ✅. If I make a mistake, I own it. There is no valor in covering it up, making excuses for it, or even fixing it and pretending it never happened. I figure that if I am open and transparent about how I fix bugs in <em>poppr</em>, then my users will hopefully have trust in me and also be comfortable in brining up any unexpected results they find.</p>
+<p>Mistakes in scientific software are commonplace. The very <a href="https://github.com/grunwaldlab/poppr/issues/1">first bug discovered in poppr</a> was discovered in 2014, there have been many more since, and there will be more as time goes on. When I find a mistake in <em>poppr</em>, I do what I would hope any other developer would do: I fix the mistake 🐛🔨, make a note that I fixed it 📝, and write a test to make sure the mistake never happens again 💻 ✅. If I make a mistake, I own it. There is no valor in covering it up, making excuses for it, or even fixing it and pretending it never happened.</p>
+<p>Unfortunately, in this case, it took me several months from finding the bug to actually fixing it. This is due, in part, to the fact that I’m now only working on <em>poppr</em> in my spare time. It was also in part for the fact that it took me so long to even figure out the right terms to google for the multinomial coefficient. In terms of actual coding, I spent a weekend re-learning C and getting everything implemented.</p>
+<p>At the end of the day, I figure that if I am open and transparent about how I fix bugs in <em>poppr</em>, then my users will hopefully have trust in me and also be comfortable in brining up any unexpected results they find.</p>
 <hr />
 </div>
 <div id="calculation-of-bruvos-distance" class="section level2">

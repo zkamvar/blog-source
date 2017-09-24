@@ -1,8 +1,8 @@
 ---
-title: Mistakes in Science
+title: Squishing a big bad bug
 author: Zhian N. Kamvar
 date: '2017-09-17'
-slug: mistakes-in-science
+slug: squish
 categories:
   - R
   - science
@@ -228,7 +228,10 @@ The very [first bug discovered in poppr](https://github.com/grunwaldlab/poppr/is
 When I find a mistake in *poppr*, I do what I would hope any other developer would do: I fix the mistake `r emo::ji_glue(":bug::hammer:")`, make a note that I fixed it `r emo::ji("memo")`, and write a test to make sure the mistake never happens again `r emo::ji_glue(":computer: :white_check_mark:")`.
 If I make a mistake, I own it.
 There is no valor in covering it up, making excuses for it, or even fixing it and pretending it never happened.
-I figure that if I am open and transparent about how I fix bugs in *poppr*, then my users will hopefully have trust in me and also be comfortable in brining up any unexpected results they find. 
+
+Unfortunately, in this case, it took me several months from finding the bug to actually fixing it. This is due, in part, to the fact that I'm now only working on *poppr* in my spare time. It was also in part for the fact that it took me so long to even figure out the right terms to google for the multinomial coefficient. In terms of actual coding, I spent a weekend re-learning C and getting everything implemented.
+
+At the end of the day, I figure that if I am open and transparent about how I fix bugs in *poppr*, then my users will hopefully have trust in me and also be comfortable in brining up any unexpected results they find. 
 
 ----
 
