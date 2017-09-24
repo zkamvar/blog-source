@@ -46,11 +46,11 @@ banner: img/banners/mistake.png
 </tr>
 <tr class="even">
 <td>(🐦 , 🦅 )</td>
-<td align="right"><em>pq</em></td>
+<td align="right"><em>p</em></td>
 </tr>
 <tr class="odd">
 <td>(🦅 , 🦅 )</td>
-<td align="right"><em>q</em></td>
+<td align="right"><em>p</em></td>
 </tr>
 </tbody>
 </table>
@@ -69,11 +69,11 @@ banner: img/banners/mistake.png
 </tr>
 <tr class="even">
 <td>(🐦 , 🦅 )</td>
-<td align="right">2<em>pq</em></td>
+<td align="right">2<em>p</em></td>
 </tr>
 <tr class="odd">
 <td>(🦅 , 🦅 )</td>
-<td align="right"><em>q</em></td>
+<td align="right"><em>p</em></td>
 </tr>
 </tbody>
 </table>
@@ -122,22 +122,22 @@ barplot(res, col = &quot;violet&quot;)</code></pre>
 <tbody>
 <tr class="odd">
 <td>(🐦 , 🐦 )</td>
-<td align="right"><em>p</em></td>
+<td align="right"><em>a</em></td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
 <td>(🐦 , 🦅 )</td>
-<td align="right"><em>pq</em></td>
+<td align="right"><em>b</em></td>
 <td align="right">2</td>
 </tr>
 <tr class="odd">
 <td>(🦅 , 🦅 )</td>
-<td align="right"><em>q</em></td>
+<td align="right"><em>c</em></td>
 <td align="right">1</td>
 </tr>
 </tbody>
 </table>
-<p>The mean without the coefficient would be (<em>p</em>*<em>pq</em>*<em>q</em>/3) whereas the mean with the coefficient would be (<em>p</em>*2<em>pq</em>*<em>q</em>/4).</p>
+<p>The mean without the coefficient would be (<em>a</em>*<em>b</em>*<em>c</em>/3) whereas the mean with the coefficient would be (<em>a</em>*2<em>b</em>*<em>c</em>/4).</p>
 <div id="implementation" class="section level3">
 <h3>Implementation</h3>
 <p>Because I didn’t have to substantially change the architecture of the calculation, I was able to give <em>poppr</em> users the ability to compare their data by adding a switch in the internal functions that would turn the coefficient calculation off if desired. This switch is controlled by the global option: <code>options(old.bruvo.model = FALSE)</code>. If it’s set to <code>TRUE</code>, calculation of Bruvo’s distance will revert to the old method of unordered alleles. By doing this, I was able to avoid adding extra potentially confusing arguments to the functions that use Bruvo’s distance while still providing backwards compatibility. 👍</p>

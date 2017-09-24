@@ -152,8 +152,8 @@ Embarassingly, I had assumed that the possible outcomes were unordered (the numb
 | outcome                       | probability |
 | ----------------------------- | -----------:|
 | (`r paste(birdz, col = " ")`) |          *p*|
-| (`r paste(beagz, col = " ")`) |          *pq*|
-| (`r paste(eaglz, col = " ")`) |          *q*|
+| (`r paste(beagz, col = " ")`) |          *p*|
+| (`r paste(eaglz, col = " ")`) |          *p*|
 
 
 as opposed to ordered (of which there is an exponential number of possible outcomes).
@@ -161,8 +161,8 @@ as opposed to ordered (of which there is an exponential number of possible outco
 | outcome                       | probability |
 | ----------------------------- | -----------:|
 | (`r paste(birdz, col = " ")`) |         *p* |
-| (`r paste(beagz, col = " ")`) |         2*pq*|
-| (`r paste(eaglz, col = " ")`) |         *q* |
+| (`r paste(beagz, col = " ")`) |         2*p*|
+| (`r paste(eaglz, col = " ")`) |         *p* |
 
 
 Of course, both (`r paste(beagz, col = " ")`) and (`r paste(rev(beagz), col = " ")`) can occur with equal frequency. 
@@ -207,11 +207,11 @@ In terms of the coin flips above, we can see how it would work:
 
 | Replaced alleles              | distance | coefficient |
 | ----------------------------- | --------:| -----------:|
-| (`r paste(birdz, col = " ")`) |      *p* |         1   |
-| (`r paste(beagz, col = " ")`) |     *pq* |         2   |
-| (`r paste(eaglz, col = " ")`) |      *q* |         1   |
+| (`r paste(birdz, col = " ")`) |      *a* |         1   |
+| (`r paste(beagz, col = " ")`) |      *b* |         2   |
+| (`r paste(eaglz, col = " ")`) |      *c* |         1   |
 
-The mean without the coefficient would be (*p*\**pq*\**q*/3) whereas the mean with the coefficient would be (*p*\*2*pq*\**q*/4).
+The mean without the coefficient would be (*a*\**b*\**c*/3) whereas the mean with the coefficient would be (*a*\*2*b*\**c*/4).
 
 ### Implementation
 
