@@ -1,0 +1,84 @@
+---
+title: Preprint Day!
+author: Zhian N. Kamvar
+date: '2017-10-02'
+slug: preprint-day
+categories:
+  - science
+tags:
+  - preprint
+  - reproducibility
+  - docker
+  - GitHub
+  - Open Science Framework
+  - Continuous Integration
+---
+
+
+
+<p>Today, we finally published a preprint for <a href="https://peerj.com/preprints/3311/?td=bl">a manuscript that spans over 15 years of data</a> 🎉!</p>
+{{% tweet 915033532543770624 %}}
+<p>Here’s the citation:</p>
+<blockquote>
+<p>Kamvar ZN, Amaradasa BS, Jhala R, McCoy S, Steadman JR, Everhart SE. (2017) Population structure and phenotypic variation of <em>Sclerotinia sclerotiorum</em> from dry bean in the United States. <em>PeerJ Preprints</em> 5:e3311v1 <a href="https://doi.org/10.7287/peerj.preprints.3311v1" class="uri">https://doi.org/10.7287/peerj.preprints.3311v1</a></p>
+</blockquote>
+<hr />
+<p>This project started in 2003 as a way to screen new dry bean lines for resistance to <a href="http://extension.colostate.edu/topic-areas/agriculture/white-mold-of-dry-beans-2-918/">white mold</a> by growing these lines in screening nurseries<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> with unsuppressed populations of <em>S. sclerotiorum</em> (the causal agent of white mold). Over the years, <a href="http://www.sclerotia.org/lifecycle/sclerotial-development">sclerotia</a> were collected from these fields and stored in the collection at UNL.</p>
+<p>We used the collection from these white mold screening nurseries along with isolates from grower fields to test if the populations of <em>S. sclerotiorum</em> in the screening nurseries were genetically differentiated from populations in the surrounding regions.</p>
+<div id="data-analysis" class="section level2">
+<h2>Data Analysis</h2>
+<p>For this paper, I decided to go full reproducibility. This means that I have all of the scripts, data, and code available (at <a href="https://github.com/everhartlab/sclerotinia-366#readme" class="uri">https://github.com/everhartlab/sclerotinia-366#readme</a>). All of the figures, tables, and numbers in the manuscript are generated directly from the analyses. There was almost no copying and pasting on my part. It was a lot of effort, but seriously the figures turned out amazing!</p>
+<p><img src="../../img/graph-11-loci-1.png" style="display: block; margin: auto;" /></p>
+<p>What’s more is that because the code is available, all the instructions for recreating this figure are available: <a href="https://github.com/everhartlab/sclerotinia-366/blame/master/doc/RMD/MLG-distribution.Rmd" class="uri">https://github.com/everhartlab/sclerotinia-366/blame/master/doc/RMD/MLG-distribution.Rmd</a></p>
+<p>All the results and manuscript is controlled via <a href="http://kbroman.org/minimal_make/">Makefile</a>. This means that you can see <a href="https://github.com/everhartlab/sclerotinia-366/blob/master/Makefile">exactly how the scripts are to be run</a>. I included a <a href="https://github.com/everhartlab/sclerotinia-366/blob/master/DESCRIPTION">DESCRIPTION</a> file in the repository so you can automatically install the necessary packages by using <a href="https://github.com/hadley/devtools#readme">devtools</a>:</p>
+<pre class="r"><code># install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;everharthlab/sclerotinia-366&quot;, repos = &quot;https://mran.microsoft.com/snapshot/2017-09-30&quot;)</code></pre>
+<p>Because we linked our project with the <a href="https://osf.io">Open Science Framework</a>, you can also cite the code and data:</p>
+<blockquote>
+<p>Kamvar, Z. N., Amaradasa, B. S., Jhala, R., McCoy, S., Steadman, J., &amp; Everhart, S. E. (2017, October 3). Population structure and phenotypic variation of <em>Sclerotinia sclerotiorum</em> from dry bean in the United States. <a href="http://doi.org/10.17605/OSF.IO/EJB5Y" class="uri">http://doi.org/10.17605/OSF.IO/EJB5Y</a></p>
+</blockquote>
+<div id="docker" class="section level3">
+<h3>Docker</h3>
+<p>Perhaps the coolest thing about this project was my first foray into using <a href="http://seankross.com/2017/09/17/Enough-Docker-to-be-Dangerous.html">Docker</a> as a way to improve reproducibility. I created a <a href="https://github.com/everhartlab/sclerotinia-366/blob/master/Dockerfile">Dockerfile</a> that gets rebuilt with <a href="https://circleci.com/gh/everhartlab/sclerotinia-366">Circle CI</a> and updated on <a href="https://hub.docker.com/r/zkamvar/sclerotinia-366/">Docker Hub</a> every time I make a change to the repository. This is really cool because you can download and explore the analysis without having to install anything more than just Docker.</p>
+<p>To explore the full analysis, you can download docker and type in your terminal:</p>
+<pre class="bash"><code>docker run --rm -dp 8787:8787 zkamvar/sclerotinia-366:latest
+# 1f3e92ec0378c0a44cce63990a4b07f78f38bc0d9ecfd3b19ea042d33e892be4</code></pre>
+<p>Once the hash shows up, you can go to your browser and type <code>localhost:8787</code> and an Rstudio window will open (if you’re presented with a login screen, login with user: rstudio, pass: rstudio):</p>
+<div class="figure">
+<img src="../../img/docker-rstudio1.png" alt="Rstudio startup" style="width:100.0%" />
+<p class="caption">Rstudio startup</p>
+</div>
+<p>The analysis is in the <code>/analysis</code> directory, but since that’s not writable, you should copy it to the home directory. In Rstudio type:</p>
+<pre class="r"><code>system(&quot;cp -R /analysis .&quot;)</code></pre>
+<p>And you should see an analysis folder pop up in your Files pane. Double click on that, scroll all the way down and double click on <code>znk_analysis.Rproj</code>, Rstudio will ask you if you want to switch to that project.</p>
+<p>Now, you can navigate to the RMD documents in <code>doc/RMD</code> or the manuscript in <code>doc/manuscript/manuscript.Rmd</code> and play around.</p>
+<p>If you type <kbd>CTRL + .</kbd>, you can navigate to <code>mlg-mcg.Rmd</code>, where you can re-execute all of the code by selecting “Run All” from the Run drop-down:</p>
+<div class="figure">
+<img src="../../img/docker-rstudio2.png" alt="Run all" style="width:100.0%" />
+<p class="caption">Run all</p>
+</div>
+<p>Once everything runs, you have all the data from that Rmarkdown document to inspect and manipulate.</p>
+<div class="figure">
+<img src="../../img/docker-rstudio3.png" style="width:100.0%" />
+
+</div>
+<p>You can even copy the analysis to your computer while the image is running:</p>
+<pre class="bash"><code>docker ps
+# CONTAINER ID        IMAGE                            COMMAND             CREATED             STATUS              PORTS                    NAMES
+# 1f3e92ec0378        zkamvar/sclerotinia-366:latest   &quot;/init&quot;             24 minutes ago      Up 24 minutes       0.0.0.0:8787-&gt;8787/tcp   modest_cori
+docker cp modest_cori:/analysis .</code></pre>
+<p>Once you’re finished, you can close that browser window/tab and then kill your container using <code>docker stop</code>:</p>
+<pre class="bash"><code>docker ps
+# CONTAINER ID        IMAGE                            COMMAND             CREATED             STATUS              PORTS                    NAMES
+# 1f3e92ec0378        zkamvar/sclerotinia-366:latest   &quot;/init&quot;             24 minutes ago      Up 24 minutes       0.0.0.0:8787-&gt;8787/tcp   modest_cori
+docker stop modest_cori
+# modest_cori</code></pre>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://naldc.nal.usda.gov/naldc/catalog.xhtml?id=IND43757287" class="uri">https://naldc.nal.usda.gov/naldc/catalog.xhtml?id=IND43757287</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="https://doi.org/10.1094/PDIS-11-10-0865" class="uri">https://doi.org/10.1094/PDIS-11-10-0865</a><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
