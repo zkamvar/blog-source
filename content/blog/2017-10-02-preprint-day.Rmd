@@ -12,6 +12,7 @@ tags:
   - GitHub
   - Open Science Framework
   - Continuous Integration
+banner: img/banners/preprint-screencap.png
 ---
 
 
@@ -128,6 +129,12 @@ docker stop modest_cori
 # modest_cori
 ```
 
+Seriously. `r emo::ji_glue(":sparkles: This is really awesome :sparkles:")`
+
+So, I could have gone with a different method for reproducibility such as [packrat](https://rstudio.github.io/packrat/), but I have [previously been burned by it](https://github.com/zkamvar/Sudden_Oak_Death_in_Oregon_Forests#readme).
+Specifically, it would do this thing where, when you opened up the repo, it would boot itself and attempt to load or build the packages for the project without asking.
+This was a pain in the butt back in 2014 when [rgdal](https://github.com/zkamvar/Sudden_Oak_Death_in_Oregon_Forests#exceptions) support was flimsy on OSX.
+For that reason, I chose to go the route of the DESCRIPTION file and Docker route. 
 
 
 
