@@ -54,7 +54,7 @@ sudo make install</code></pre>
 </tr>
 </tbody>
 </table>
-<p>In this case, we didn’t have <code>sparsehash</code>, but that’s OK because we can simply install sparsehash and use:</p>
+<p>In this case, we didn’t have <code>sparsehash</code>, but that’s OK because we can simply download and install <a href="https://github.com/sparsehash/sparsehash">sparsehash</a> and then use the following in our ABySS configuration step:</p>
 <pre class="bash"><code>./configure CPPFLAGS=-I/path/to/local/include</code></pre>
 </div>
 <div id="compiling" class="section level2">
@@ -72,14 +72,17 @@ sudo make install</code></pre>
 # It appears as if we need to have ABYSS-P installed for the parallel version
 # The way we can do that... I think... is by running the installation process
 # of abyss on the cluster using openmp</code></pre>
+<p>I wrote this note to myself because I had foolishsly tried to run the installation by logging in to a work node interactively because I didn’t want to write 6 extra SLURM lines 😒. Let this be a lesson to you readers, write a script even if it’s only a few lines 👍. The scripts that finally worked were:</p>
 <blockquote>
 <p>Note, I’m using the environment variables <code>${WORK}</code> and <code>${HSH}</code> to mean <code>/work</code> and <code>/home/shared</code>, respectively.</p>
 </blockquote>
+<div id="build-sparsehash.sh" class="section level4">
+<h4>build-sparsehash.sh</h4>
 <pre class="bash"><code>#!/usr/bin/env bash
-#SBATCH --job-name=SPAREHASH-BUILD
+#SBATCH --job-name=SPARSEHASH-BUILD
 #SBATCH --time=04:00:00
-#SBATCH --output=compilation-jobs/SPAREHASH.out
-#SBATCH --error=compilation-jobs/SPAREHASH.err
+#SBATCH --output=compilation-jobs/SPARSEHASH.out
+#SBATCH --error=compilation-jobs/SPARSEHASH.err
 #SBATCH --mem=4gb
 #SBATCH --cpus-per-task=1
 
@@ -91,6 +94,9 @@ cd sparsehash-sparsehash-2.0.3/
 ./configure --prefix=${WORK}/sparsehash
 make
 make install</code></pre>
+</div>
+<div id="build-abyss.sh" class="section level4">
+<h4>build-abyss.sh</h4>
 <pre class="bash"><code>#!/usr/bin/env bash
 #SBATCH --job-name=ABYSS-BUILD
 #SBATCH --time=04:00:00
@@ -104,12 +110,19 @@ module load compiler/gcc/6.1 openmpi/2.1 boost/1.63
 #  Now that we have sparehash compiled, we need to compile ABySS in a similar
 #  fashion. Again, I normally use an interactive terminal for this.
 
-       tar -xzvf /home/everhartlab/shared/tarballs/abyss-2.0.2.tar.gz -C ${WORK}
-       cd abyss-2.0.2/
-       ./configure --prefix=${WORK}/abyss CPPFLAGS=-I/home/everhartlab/shared/local/include
-       make
-       make install
-       make check</code></pre>
+tar -xzvf ${HSH}/tarballs/abyss-2.0.2.tar.gz -C ${WORK}
+cd abyss-2.0.2/
+./configure --prefix=${WORK}/abyss CPPFLAGS=-I${HSH}/local/include
+make
+make install
+make check</code></pre>
+<p>I say the scripts that <em>finally</em> worked because I forgot to include boost in the modules originally, which <a href="https://github.com/bcgsc/abyss/issues/166">resulted in only some of the ABySS programs being built</a> 🤦. When I looked at the options I had for boost, I naturally wanted to go with the most recent version, 1.64. When I added boost/1.64 to the module line, the compilation never got off the ground because I got the following error 💢:</p>
+<pre><code>Lmod has detected the following error:  These module(s) exist but cannot be loaded as requested: &quot;boost/1.64&quot;
+   Try: &quot;module spider boost/1.64&quot; to see how to load the module(s).</code></pre>
+<p>I found out that boost 1.64 depended on gcc 7.1, so instead of reconfiguring sparsehash to be built with gcc 7.1, I decided to downgrade boost to version 6.1.</p>
+<hr />
+<p>I should say that, I never expect any bioinformatics software to be straightforward to install. I’m really glad that the authors of ABySS had the detailed installation instructions for those who may not be familiar with all the different flags in the <code>./configure</code> step. If this post helps at least one person (including my future self), I’ll be happy.</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />
