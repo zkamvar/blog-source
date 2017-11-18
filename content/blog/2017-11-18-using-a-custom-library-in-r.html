@@ -1,0 +1,83 @@
+---
+title: Using a custom library in R
+author: Zhian N. Kamvar
+date: '2017-11-18'
+slug: using-a-custom-library-in-r
+categories:
+  - R
+  - example
+tags:
+  - library
+  - .libPaths()
+  - .Renviron
+  - environment variable
+  - R
+banner: img/banners/smashing-library.gif
+---
+
+
+
+<p>I’ve been using a custom library for R since 2012 and I’ve never looked back. I’ve not seen many tutorials for people do do this through R, so I figured I’d write a quick one.</p>
+<div id="where-does-your-r-package-library-live" class="section level1">
+<h1>Where does your R package library live?</h1>
+<p>You can ususally find this out by typing <code>.libPaths()</code> in your R console. If you have an out-of-the-box installation, it will generally be somewhere like:</p>
+<pre><code>C:/Program Files/R/R-3.4.2/library</code></pre>
+<p>or</p>
+<pre><code>/Library/Frameworks/R.framework/Versions/3.4/Resources/library</code></pre>
+<p>This is the place on your computer where R will put any packages you attempt to install with <code>install.packages()</code>. However, you might notice one problem: this library is version-specific, which means that when you update R, you will also have to <a href="https://www.r-bloggers.com/upgrade-r-without-losing-your-packages/">migrate your existing library</a>. Moreover, if you’re on Windows, <a href="https://stackoverflow.com/q/15170399/2752888">you may not have permissions to write to the library path</a> 🙀.</p>
+</div>
+<div id="what-if-i-told-you-there-was-a-better-way" class="section level1">
+<h1>What if I told you there was a better way?</h1>
+<div class="figure">
+<img src="../../img/banners/smashing-library.gif" />
+
+</div>
+<p>The solution to avoid the hassle of constat library migration is to make a custom library folder<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and set the environmental variable <code>R_LIBS</code> to point to that folder 👍.</p>
+<p>Now, this has been <a href="https://www.r-bloggers.com/updating-r-but-keeping-your-installed-packages/">touched</a> <a href="https://csgillespie.github.io/efficientR/3-3-r-startup.html#renviron">on</a> <a href="http://kbroman.org/pkg_primer/pages/build.html#installing-a-package-in-a-personal-directory">before</a>, but when it comes to explaining HOW to set that environment variable, these fall short<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> 🤷‍♂️. This short post will demonstrate how to persistently set the variable without ever having to leave R 😎.</p>
+</div>
+<div id="creating-your-.renviron-file-and-setting-r_libs" class="section level1">
+<h1>Creating your <code>.Renviron</code> file and setting <code>R_LIBS</code></h1>
+<p>The <code>.Renviron</code> file is where you can store environment variables that R uses to gather specific information about your particular computer. In this case, we are going to use it to tell R where your R library lives using the <code>R_LIBS</code> environment variable.</p>
+<p>What we are going to do is:</p>
+<ol style="list-style-type: decimal">
+<li>Create a folder (~/R/library) to serve as our new library</li>
+<li>Create a file called <code>~/.Renviron</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></li>
+<li>Add <code>R_LIBS=~/R/library</code> to the <code>~/.Renviron</code> file</li>
+<li>Restart R and install our packages.</li>
+</ol>
+<blockquote>
+<p>For this tutorial, I’m using ~/R/library for the custom library, but you can set it to any folder you wish.</p>
+</blockquote>
+<p>The first step, create the directory. Note that this will give you a warning message if the directory already exists.</p>
+<pre class="r"><code>dir.create(&quot;~/R/library&quot;, recursive = TRUE)</code></pre>
+<p>Now we can create our <code>~/.Renviron</code> file. This is a part we need to be careful. If there already is a <code>.Renviron</code> file, we don’t want to accidentally clobber it. To help with that, we will use <code>file.exists()</code> with an <code>if</code> statement to tell us whether or not to create the file:</p>
+<pre class="r"><code>if (file.exists(&quot;~/.Renviron&quot;)) {
+  message(&quot;~/.Renviron already exists!&quot;)
+} else {
+  file.create(&quot;~/.Renviron&quot;)
+  message(&quot;created ~/.Renviron&quot;)
+}</code></pre>
+<pre><code>## created ~/.Renviron</code></pre>
+<p>Now we can write <code>R_LIBS=~/R/library</code> to the <code>~/.Renviron</code> file:</p>
+<pre class="r"><code>cat(&quot;R_LIBS=~/R/library&quot;, file = &quot;~/.Renviron&quot;, append = TRUE)</code></pre>
+<blockquote>
+<p>Restart R now</p>
+</blockquote>
+<p>Now after you’ve restarted R, your library will appear:</p>
+<pre class="r"><code>.libPaths()</code></pre>
+<pre><code>## [1] &quot;/Users/zhian/R/library&quot;                                        
+## [2] &quot;/Library/Frameworks/R.framework/Versions/3.4/Resources/library&quot;</code></pre>
+</div>
+<div id="moving-forward" class="section level1">
+<h1>Moving forward</h1>
+<p>Now you can feel free to update your version of R without having to go through the hassle of migrating your library. Even better, you can take advantage of <code>update.packages()</code> to auto-update packages in your R library like so:</p>
+<pre class="r"><code>update.packages(ask = FALSE, checkBuilt = TRUE)</code></pre>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Note: I am using the word “folder” here to mean “directory”.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Please do not take this to mean that these are bad resources. I’m just picking nits here 😄.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Two things: 1) The ~/ denotes the home folder. All of your documents are nested in this folder. 2) <code>.Renviron</code> starts with a dot, which hides it from your file browser by default.<a href="#fnref3">↩</a></p></li>
+</ol>
+</div>
