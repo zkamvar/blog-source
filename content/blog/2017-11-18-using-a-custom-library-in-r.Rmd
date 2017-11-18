@@ -25,7 +25,7 @@ write a quick one.
 
 # Where does your R package library live?
 
-You can ususally find this out by typing `.libPaths()` in your R console. If you have an out-of-the-box installation, it will generally be somewhere like:
+You can usually find this out by typing `.libPaths()` in your R console. If you have an out-of-the-box installation, it will generally be somewhere like:
 
 ```
 C:/Program Files/R/R-3.4.2/library
@@ -49,7 +49,7 @@ library path](https://stackoverflow.com/q/15170399/2752888) `r emo::ji("scream_c
 
 ![](../../img/banners/smashing-library.gif)
 
-The solution to avoid the hassle of constat library migration is to make a custom library folder[^0] and set the environmental variable 
+The solution to avoid the hassle of constant library migration is to make a custom library folder[^0] and set the environmental variable 
 `R_LIBS` to point to that folder `r emo::ji("+1")`. 
 
 Now, this has been
@@ -57,8 +57,8 @@ Now, this has been
 [on](https://csgillespie.github.io/efficientR/3-3-r-startup.html#renviron)
 [before](http://kbroman.org/pkg_primer/pages/build.html#installing-a-package-in-a-personal-directory),
 but when it comes to explaining HOW to set that environment
-variable, these fall short[^1] `r emo::ji("man_shrugging")`. This short post will demonstrate how to persistently set the
-variable without ever having to leave R `r emo::ji("sunglasses")`.
+variable, something is always missing[^1] `r emo::ji("man_shrugging")`. This short post will demonstrate how to persistently set the
+variable *without ever having to leave R* `r emo::ji("sunglasses")`.
 
 # Creating your `.Renviron` file and setting `R_LIBS`
 
@@ -104,7 +104,7 @@ Now we can write `R_LIBS=~/R/library` to the `~/.Renviron` file:
 cat("R_LIBS=~/R/library", file = "~/.Renviron", append = TRUE)
 ```
 
-> Restart R now
+## Restart R
 
 Now after you've restarted R, your library will appear:
 

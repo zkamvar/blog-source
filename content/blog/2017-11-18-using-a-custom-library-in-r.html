@@ -20,7 +20,7 @@ banner: img/banners/smashing-library.gif
 <p>I’ve been using a custom library for R since 2012 and I’ve never looked back. I’ve not seen many tutorials for people do do this through R, so I figured I’d write a quick one.</p>
 <div id="where-does-your-r-package-library-live" class="section level1">
 <h1>Where does your R package library live?</h1>
-<p>You can ususally find this out by typing <code>.libPaths()</code> in your R console. If you have an out-of-the-box installation, it will generally be somewhere like:</p>
+<p>You can usually find this out by typing <code>.libPaths()</code> in your R console. If you have an out-of-the-box installation, it will generally be somewhere like:</p>
 <pre><code>C:/Program Files/R/R-3.4.2/library</code></pre>
 <p>or</p>
 <pre><code>/Library/Frameworks/R.framework/Versions/3.4/Resources/library</code></pre>
@@ -32,8 +32,8 @@ banner: img/banners/smashing-library.gif
 <img src="../../img/banners/smashing-library.gif" />
 
 </div>
-<p>The solution to avoid the hassle of constat library migration is to make a custom library folder<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and set the environmental variable <code>R_LIBS</code> to point to that folder 👍.</p>
-<p>Now, this has been <a href="https://www.r-bloggers.com/updating-r-but-keeping-your-installed-packages/">touched</a> <a href="https://csgillespie.github.io/efficientR/3-3-r-startup.html#renviron">on</a> <a href="http://kbroman.org/pkg_primer/pages/build.html#installing-a-package-in-a-personal-directory">before</a>, but when it comes to explaining HOW to set that environment variable, these fall short<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> 🤷‍♂️. This short post will demonstrate how to persistently set the variable without ever having to leave R 😎.</p>
+<p>The solution to avoid the hassle of constant library migration is to make a custom library folder<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and set the environmental variable <code>R_LIBS</code> to point to that folder 👍.</p>
+<p>Now, this has been <a href="https://www.r-bloggers.com/updating-r-but-keeping-your-installed-packages/">touched</a> <a href="https://csgillespie.github.io/efficientR/3-3-r-startup.html#renviron">on</a> <a href="http://kbroman.org/pkg_primer/pages/build.html#installing-a-package-in-a-personal-directory">before</a>, but when it comes to explaining HOW to set that environment variable, something is always missing<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> 🤷‍♂️. This short post will demonstrate how to persistently set the variable <em>without ever having to leave R</em> 😎.</p>
 </div>
 <div id="creating-your-.renviron-file-and-setting-r_libs" class="section level1">
 <h1>Creating your <code>.Renviron</code> file and setting <code>R_LIBS</code></h1>
@@ -60,13 +60,13 @@ banner: img/banners/smashing-library.gif
 <pre><code>## created ~/.Renviron</code></pre>
 <p>Now we can write <code>R_LIBS=~/R/library</code> to the <code>~/.Renviron</code> file:</p>
 <pre class="r"><code>cat(&quot;R_LIBS=~/R/library&quot;, file = &quot;~/.Renviron&quot;, append = TRUE)</code></pre>
-<blockquote>
-<p>Restart R now</p>
-</blockquote>
+<div id="restart-r" class="section level2">
+<h2>Restart R</h2>
 <p>Now after you’ve restarted R, your library will appear:</p>
 <pre class="r"><code>.libPaths()</code></pre>
 <pre><code>## [1] &quot;/Users/zhian/R/library&quot;                                        
 ## [2] &quot;/Library/Frameworks/R.framework/Versions/3.4/Resources/library&quot;</code></pre>
+</div>
 </div>
 <div id="moving-forward" class="section level1">
 <h1>Moving forward</h1>
