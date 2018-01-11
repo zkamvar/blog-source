@@ -3,6 +3,8 @@ title: "Scholarly Publications"
 date: "2017-09-24"
 ---
 
+**Kamvar ZN**, Amaradasa BS, Jhala R, McCoy S, Steadman JR, Everhart SE. (2017) Population structure and phenotypic variation of *Sclerotinia sclerotiorum* from dry bean (*Phaseolus vulgaris*) in the United States. *PeerJ* 5:e4152 doi: [10.7717/peerj.4152](https://doi.org/10.7717/peerj.4152)
+
 Grünwald NJ, Everhart SE, Knaus BJ, **Kamvar ZN**. (2017) Best practices for population genetic analyses. *Phytopathology* 107:9 doi: [10.1094/PHYTO-12-16-0425-RVW](https://doi.org/10.1094/PHYTO-12-16-0425-RVW)
 
 Jombart T, Archer F, Schliep K, **Kamvar ZN**, Harris R, Paradis E, Goudet J, Lapp H (2017). apex: phylogenetics with multiple genes. *Molecular Ecology Resources.* 17:1 19-26 doi: [10.1111/1755-0998.12567](https://doi.org/10.1111/1755-0998.12567)
