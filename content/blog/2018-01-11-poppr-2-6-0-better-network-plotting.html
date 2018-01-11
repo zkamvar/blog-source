@@ -1,0 +1,42 @@
+---
+title: 'Poppr 2.6.0: Better Network Plotting'
+author: Zhian N. Kamvar
+date: '2018-01-11'
+slug: poppr-2-6-0-better-network-plotting
+categories:
+  - R
+  - example
+tags:
+  - CRAN
+  - poppr
+  - R
+banner: img/banners/msn.png
+---
+
+
+
+<p>Poppr version 2.6.0 has <a href="https://cran.r-project.org/package=poppr">officially been released on CRAN</a> and should be built for all operating systems within the next few days 🎉. You can check out the <a href="https://grunwaldlab.github.io/poppr/news/index.html#poppr-2-6-0">NEWS</a> for full details. This release features a new function called <a href="https://grunwaldlab.github.io/poppr/reference/boot.ia.html"><code>boot.ia()</code></a> to assess how the <a href="https://grunwaldlab.github.io/poppr/reference/ia.html#details">Index of Association</a> responds to repeat observations (clones). Perhaps the biggest feature is the change in how minimum spanning networks are plotted.</p>
+<p>Minimum spanning networks were originally implemented in poppr by Javier Tabima and I, and since then they’ve gone through some tweaking, eventually including features like reticulation of equivalent paths and a GUI to help construct these networks.</p>
+<p>There were two problems, however:</p>
+<ol style="list-style-type: decimal">
+<li>Nodes were scaled by radius instead of area</li>
+<li>There was no legend for node sizes</li>
+</ol>
+<p>Plotting by radius was especially problematic because they <a href="http://coolinfographics.com/blog/2014/8/29/false-visualizations-sizing-circles-in-infographics.html">exaggerate differences between groups</a>. Here’s an example of a network that was plotted with the previous version of poppr:</p>
+<p><img src="/blog/2018-01-11-poppr-2-6-0-better-network-plotting_files/figure-html/orig-plot-1.png" width="672" /></p>
+<p>And here’s that same network plotted with the current version:</p>
+<pre class="r"><code>library(&quot;poppr&quot;)
+data(Aeut)
+
+# Basic plot
+set.seed(2018-01-08)
+amsn &lt;- poppr.msn(Aeut, diss.dist(Aeut), include.ties = TRUE)</code></pre>
+<p><img src="/blog/2018-01-11-poppr-2-6-0-better-network-plotting_files/figure-html/msn_demo-1.png" width="672" /></p>
+<pre class="r"><code># with scale bar
+set.seed(2018-01-08)
+plot_poppr_msn(Aeut,
+               amsn,
+               inds = &quot;none&quot;, # don&#39;t show any labels 
+               nodelab = 100 # don&#39;t label the sizes of nodes
+               )</code></pre>
+<p><img src="/blog/2018-01-11-poppr-2-6-0-better-network-plotting_files/figure-html/msn_demo-2.png" width="672" /></p>
