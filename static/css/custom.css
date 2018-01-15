@@ -3641,3 +3641,16 @@ a.list-group-item.active > .badge,
   padding: 10px;
 }
 
+figure {
+    display: inline-block;
+    border: 1px;
+    margin: 20px;
+}
+figure img {
+    vertical-align: top;
+}
+figure figcaption {
+    border: 1px;
+    text-align: center;
+    color: #A9A9A9;
+}
