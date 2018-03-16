@@ -1,0 +1,189 @@
+---
+title: "Splitting Hairs: *poppr* version 2.7"
+author: Zhian N. Kamvar
+date: '2018-03-16'
+slug: poppr-2-7
+categories:
+  - R
+  - science
+  - example
+tags:
+  - poppr
+  - CRAN
+  - R
+  - AMOVA
+  - polysat
+banner: img/banners/jalapeno_logo.png
+---
+
+
+
+<div id="positive-contact" class="section level1">
+<h1>Positive Contact</h1>
+<p>This version of <em>poppr</em> is a direct result of feedback that was prompted by my own feedback.</p>
+<p>I’m always grateful for eagle-eyed users of <em>poppr</em> who report when things are going awry. Recently, I had noticed that <em>poppr</em> was cited in a recent review on the analysis of polyploid genetic data <a href="https://doi.org/10.1093/jhered/esy006">(Meirmans, Liu, and Tienderen 2018)</a> that highlighted some limitations with established methods, including Bruvo’s distance <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2004.02209.x/full">(Bruvo et al. 2004)</a>.</p>
+<p>I had noticed a pattern that I thought could have been caused by an old bug (that has <a href="../squish/index.html">since been fixed</a>) and emailed Dr. Meirmans.</p>
+<figure>
+<img src="../../img/meirmans-bruvo.png" alt="Four scatterplots showing the effect of parameter choice on Bruvo's distance. The combined model (top left, default) was the one shown in Meirmans, Liu, and Tienderen 2018. Small arrows for each point represent the difference between the old model and new model." />
+<figcaption>
+Four scatterplots showing the effect of parameter choice on Bruvo’s distance. The combined model (top left, default) was the one shown in Meirmans, Liu, and Tienderen 2018. Small arrows for each point represent the difference between the old model and new model.
+</figcaption>
+</figure>
+<p>In the end, we figured that this pattern was genuine and not the result of a bug. However, my correspondence to Dr. Meirmans had prompted him to contact me about an upcoming paper he has on validating AMOVA for polyploids. He had noted that, while <em>poppr</em> worked well for calculating AMOVA, it failed to calculate the correct version of <span class="math inline">\(\rho\)</span>, which uses the AMOVA framework to assess differentiation in autopolyploids by calculating a distance matrix on individual-based allele frequencies (<a href="http://www.genetics.org/content/150/2/921.short">Ronfort et al 1998</a>). After a brief moment of embarassment, I got to work updating <em>poppr</em> and its documentation.</p>
+</div>
+<div id="changes-in-poppr-version-2.7" class="section level1">
+<h1>Changes in <em>poppr</em> version 2.7</h1>
+<p>Poppr version 2.7 introduces a change to how AMOVA is calculated and two new functions for data conversion:</p>
+<ul>
+<li><code>make_haplotypes()</code> for splitting data into pseudo-haplotypes</li>
+<li><code>as.genambig()</code> for converting genind/genclone objects to polysat’s genambig class.</li>
+</ul>
+<p>The changes will be outlined here.</p>
+<blockquote>
+<p>Note: Due to a documentation error, the correct version will be 2.7.1</p>
+</blockquote>
+</div>
+<div id="amova-for-polyploids" class="section level1">
+<h1>AMOVA for polyploids</h1>
+<p>Meirmans and Liu (unpublished) present an analysis of the AMOVA framework for polyploids, showing that it is possible to calculate AMOVA for polyploiods if full dosage is known. Thus, <em>poppr</em> can now provide AMOVA calculations for polyploid data if the full dosage is known. If this is unknown (most cases), then the parameter <span class="math inline">\(\rho\)</span> will be calculated (<a href="http://www.genetics.org/content/150/2/921.short">Ronfort et al 1998</a>).</p>
+<p>Rho is a method of calculating population differentiation in the AMOVA framework without considering within-individual variance and is analogous to Fst for use with autotetraploid organisms (<a href="http://www.genetics.org/content/150/2/921.short">Ronfort et al 1998</a>; Miermans and Liu 2018). The process uses the Euclidean distance of allele frequencies and can be performed by setting <code>within = FALSE</code>.</p>
+<pre class="r"><code>library(&quot;poppr&quot;)
+data(&quot;Pinf&quot;)
+Pinf</code></pre>
+<pre><code>## 
+## This is a genclone object
+## -------------------------
+## Genotype information:
+## 
+##    72 multilocus genotypes 
+##    86 tetraploid individuals
+##    11 codominant loci
+## 
+## Population information:
+## 
+##     2 strata - Continent, Country
+##     2 populations defined - South America, North America</code></pre>
+<pre class="r"><code># be sure to recode your polyploid data so that there are no zeroes for placeholders
+(prc &lt;- recode_polyploids(Pinf, newploidy = TRUE))</code></pre>
+<pre><code>## 
+## This is a genclone object
+## -------------------------
+## Genotype information:
+## 
+##    72 multilocus genotypes 
+##    86 diploid (55) and triploid (31) individuals
+##    11 codominant loci
+## 
+## Population information:
+## 
+##     2 strata - Continent, Country
+##     2 populations defined - South America, North America</code></pre>
+<pre class="r"><code># calculate rho
+rho  &lt;- poppr.amova(prc, ~Continent/Country, within = FALSE, cutoff = .1, quiet = TRUE)
+rho$statphi</code></pre>
+<pre><code>##                              Phi
+## Phi-samples-total     0.12713922
+## Phi-samples-Continent 0.05269217
+## Phi-Continent-total   0.07858802</code></pre>
+<p>Here, the value of <span class="math inline">\(\rho\)</span> is 0.1271392.</p>
+<div id="changes-in-amova-for-poppr-2.7-can-affect-your-results" class="section level2">
+<h2>Changes in AMOVA for <em>poppr</em> 2.7 can affect your results</h2>
+<p>The process of calculating AMOVA in <em>poppr</em> involved four steps:</p>
+<ol style="list-style-type: decimal">
+<li>If the data were diploid, genotypes were split into pseudo-haplotypes</li>
+<li>A distance matrix was calculated using <code>diss.dist()</code> and the square root was taken</li>
+<li>The matrix and hierarchy were prepared for either ade4 or pegas</li>
+<li>AMOVA was calculated using either ade4 or pegas</li>
+</ol>
+<p>In this new version of poppr, you now have access to the function that splits haplotypes called <code>make_haplotypes()</code>.</p>
+<p><strong>The major change in <em>poppr</em> 2.7 is that the <code>dist()</code> has replaced <code>diss.dist()</code></strong></p>
+<div id="changing-diss.dist-to-dist" class="section level3">
+<h3>Changing <code>diss.dist()</code> to <code>dist()</code></h3>
+<p>The default distance calculation for all AMOVA was <code>diss.dist()</code>, which is a dissimilarity distance. For haploid or pseudo-haploid data, this is equivalent to a squared Euclidean distance, and was appropriate for calculating the distance for use when the <code>within = TRUE</code> option was set (which was default). This method, however, was not appropriate when not considering within-individual variation.</p>
+<p>For example, this is how the previous versions of <em>poppr</em> would have calculated <span class="math inline">\(\rho\)</span>:</p>
+<pre class="r"><code>dissim &lt;- diss.dist(prc)
+old  &lt;- poppr.amova(prc, ~Continent/Country, within = FALSE, cutoff = .1, quiet = TRUE, 
+                    dist = dissim, squared = TRUE)</code></pre>
+<pre><code>## Distance matrix is non-euclidean.</code></pre>
+<pre><code>## Using quasieuclid correction method. See ?quasieuclid for details.</code></pre>
+<pre class="r"><code>old$statphi</code></pre>
+<pre><code>##                              Phi
+## Phi-samples-total     0.15032208
+## Phi-samples-Continent 0.12439575
+## Phi-Continent-total   0.02960965</code></pre>
+<p>If we compare this result to the one above, we can see that there is a distinct difference in the values of <span class="math inline">\(\rho\)</span>.</p>
+<div id="amova-with-missing-data" class="section level4">
+<h4>AMOVA with missing data</h4>
+<p>The <code>dist()</code> function handles missing data differently than <code>diss.dist()</code>, so you may see small differences in your results (for details, see this StackOverflow answer: <a href="https://stackoverflow.com/a/18117751/2752888" class="uri">https://stackoverflow.com/a/18117751/2752888</a>).</p>
+<p>For example, the nancycats data set has an average of 2.3% missing data. This results in a small shift in the <span class="math inline">\(\Phi\)</span> statistics. Here are the results with version 2.7:</p>
+<pre class="r"><code>data(nancycats)
+strata(nancycats) &lt;- data.frame(colony = pop(nancycats))
+new &lt;- poppr.amova(nancycats, ~colony, cutoff = .1, quiet = TRUE)</code></pre>
+<pre><code>## Distance matrix is non-euclidean.</code></pre>
+<pre><code>## Using quasieuclid correction method. See ?quasieuclid for details.</code></pre>
+<pre class="r"><code>new$statphi</code></pre>
+<pre><code>##                          Phi
+## Phi-samples-total  0.1971382
+## Phi-samples-colony 0.1235778
+## Phi-colony-total   0.0839327</code></pre>
+<p>To show the results from previous versions, we need to use the new <code>make_haplotypes()</code> function to create pseudo-haplotypes:</p>
+<pre class="r"><code>nanhaps &lt;- make_haplotypes(nancycats)
+
+# confirm that the number of individuals is double that of the original data
+nInd(nanhaps)</code></pre>
+<pre><code>## [1] 474</code></pre>
+<pre class="r"><code>2 * nInd(nancycats)</code></pre>
+<pre><code>## [1] 474</code></pre>
+<pre class="r"><code># calculate squared Euclidean distance
+d2n &lt;- diss.dist(nanhaps)
+
+# calculate AMOVA
+old &lt;- poppr.amova(nanhaps, ~colony/Individual, cutoff = .1, quiet = TRUE, 
+                   dist = d2n, squared = TRUE)</code></pre>
+<pre><code>## Distance matrix is non-euclidean.</code></pre>
+<pre><code>## Using quasieuclid correction method. See ?quasieuclid for details.</code></pre>
+<pre class="r"><code>old$statphi</code></pre>
+<pre><code>##                           Phi
+## Phi-samples-total  0.19292024
+## Phi-samples-colony 0.12109840
+## Phi-colony-total   0.08171772</code></pre>
+<p>The different treatment of the missing data has created a difference of 0.004218 in <span class="math inline">\(\Phi_{ST}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="converting-genindgenclone-to-polysat" class="section level1">
+<h1>Converting genind/genclone to polysat</h1>
+<p>Polysat is a package that works with polyploid microsatellite data. You can install it from CRAN with <code>install.packages(&quot;polysat&quot;)</code>. The <em>poppr</em> function <code>as.genambig()</code> will convert from genind to genambig:</p>
+<pre class="r"><code>library(&quot;polysat&quot;) # load polysat
+Pinf</code></pre>
+<pre><code>## 
+## This is a genclone object
+## -------------------------
+## Genotype information:
+## 
+##    72 multilocus genotypes 
+##    86 tetraploid individuals
+##    11 codominant loci
+## 
+## Population information:
+## 
+##     2 strata - Continent, Country
+##     2 populations defined - South America, North America</code></pre>
+<pre class="r"><code>Pinf.ga &lt;- as.genambig(Pinf) # Convert to genambig
+summary(Pinf.ga)             # Show the summary of the contents</code></pre>
+<pre><code>## Dataset with allele copy number ambiguity.
+## Insert dataset description here.
+## Number of missing genotypes: 10
+## 86 samples, 11 loci.
+## 2 populations.
+## Ploidies: 2 3 NA
+## Length(s) of microsatellite repeats: NA</code></pre>
+<p>Once you have your genambig object, you can use all the functions polysat has available.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>Patrick G Meirmans, Shenglin Liu, Peter H van Tienderen; The Analysis of Polyploid Genetic Data, Journal of Heredity, Volume 109, Issue 3, 16 March 2018, Pages 283–296, <a href="https://doi.org/10.1093/jhered/esy006" class="uri">https://doi.org/10.1093/jhered/esy006</a></p>
+<p>BRUVO, R., MICHIELS, N. K., D’SOUZA, T. G. and SCHULENBURG, H. (2004), A simple method for the calculation of microsatellite genotype distances irrespective of ploidy level. Molecular Ecology, 13: 2101–2106. <a href="https://doi.org/10.1111/j.1365-294X.2004.02209.x" class="uri">https://doi.org/10.1111/j.1365-294X.2004.02209.x</a></p>
+<p>Ronfort, Joëlle, Eric Jenczewski, Thomas Bataillon, and François Rousset. “Analysis of population structure in autotetraploid species.” Genetics 150, no. 2 (1998): 921-930. <a href="http://www.genetics.org/content/150/2/921.short" class="uri">http://www.genetics.org/content/150/2/921.short</a></p>
+</div>
