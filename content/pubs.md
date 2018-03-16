@@ -3,7 +3,31 @@ title: "Scholarly Publications"
 date: "2017-09-24"
 ---
 
+# Pre-Prints
+
+> These publications have not yet been peer-reviewed, but have been submitted.
+
+**Kamvar ZN**, Everhart SE. (2018) Something in the agar does not compute: On the discriminatory power of mycelial compatibility in *Sclerotinia sclerotiorum*. *PeerJ Preprints* 6:e26670v1 doi: [10.7287/peerj.preprints.26670v1](https://doi.org/10.7287/peerj.preprints.26670v1)
+
+ -  simulations:  https://github.com/everhartlab/sclerotinia-review-2017           
+ -  doi:          [10.17605/OSF.IO/B8VD3/](https://doi.org/10.17605/OSF.IO/B8VD3/) 
+
+Pannullo A, **Kamvar ZN**, Miorini TJJ, Steadman JR, Everhart SE. (2018) Genetic variation and structure of *Sclerotinia sclerotiorum* populations from soybean in Brazil. *PeerJ Preprints* 6:e26600v1 doi: [10.7287/peerj.preprints.26600v1](https://doi.org/10.7287/peerj.preprints.26600v1)
+
+ -  data/analysis:  https://github.com/everhartlab/brazil-sclerotinia-2017         
+ -  doi:            [10.17605/OSF.IO/E4UPH](https://doi.org/10.17605/OSF.IO/E4UPH) 
+
+Miorini TJJ, **Kamvar ZN**, Higgins R, Raetano CG, Steadman JR, Everhart SE. (2018) Vari- ation in pathogen aggression and cultivar performance against *Sclerotinia sclerotiorum* in soybean and dry bean from Brazil and the U.S. *PeerJ Preprints* 6:e26622v1 doi: [10.7287/peerj.preprints.26622v1](https://doi.org/10.7287/peerj.preprints.26622v1)
+
+ -  data/analysis:  https://github.com/everhartlab/SscPhenoProj                    
+ -  doi:            [10.17605/OSF.IO/2X7FC](https://doi.org/10.17605/OSF.IO/2X7FC) 
+
+# Peer-Reviewed Publications
+
 **Kamvar ZN**, Amaradasa BS, Jhala R, McCoy S, Steadman JR, Everhart SE. (2017) Population structure and phenotypic variation of *Sclerotinia sclerotiorum* from dry bean (*Phaseolus vulgaris*) in the United States. *PeerJ* 5:e4152 doi: [10.7717/peerj.4152](https://doi.org/10.7717/peerj.4152)
+
+ -  data/analysis:  https://github.com/everhartlab/sclerotinia-366                 
+ -  doi:            [10.17605/OSF.IO/EJB5Y](https://doi.org/10.17605/OSF.IO/EJB5Y) 
 
 Grünwald NJ, Everhart SE, Knaus BJ, **Kamvar ZN**. (2017) Best practices for population genetic analyses. *Phytopathology* 107:9 doi: [10.1094/PHYTO-12-16-0425-RVW](https://doi.org/10.1094/PHYTO-12-16-0425-RVW)
 
@@ -17,7 +41,13 @@ Grünwald NJ, Larsen MM, **Kamvar ZN**, Reeser PW, Kanaskie A, Laine J, Wiese R 
 
 **Kamvar ZN**, Brooks JC and Grünwald NJ (2015) Novel R tools for analysis of genome-wide population genetic data with emphasis on clonality. *Front. Genet.* 6: 208. doi: [10.3389/fgene.2015.00208](https://doi.org/10.3389/fgene.2015.00208)
 
+ -  data/analysis:  https://github.com/grunwaldlab/supplementary-poppr-2.0        
+ -  doi:            [10.5281/zenodo.17424 ](https://doi.org/10.5281/zenodo.17424) 
+
 **Kamvar ZN**, Larsen MM, Kanaskie AM, Hansen EM, and Grünwald NJ. (2015) Spatial and temporal analysis of populations of the sudden oak death pathogen in Oregon forests. *Phytopathology.* 105:7 982-989. doi: [10.1094/PHYTO-12-14-0350-FI.](https://doi.org/10.1094/PHYTO-12-14-0350-FI.)
+
+ -  data/analysis:  https://github.com/zkamvar/Sudden_Oak_Death_in_Oregon_Forests 
+ -  doi:            [10.5281/zenodo.13007 ](https://doi.org/10.5281/zenodo.13007) 
 
 Weiland JE, Garrido PA, **Kamvar ZN**, Marek SM, Grünwald NJ, and Garzón CD. (2015) Population structure of *Pythium irregulare*, *P. sylvaticum*, and *P. ultimum* in forest nursery soils of Oregon and Washington. *Phytopathology.* 105:5 684-694. doi: [10.1094/PHYTO-05-14-0147-R](https://doi.org/10.1094/PHYTO-05-14-0147-R)
 
