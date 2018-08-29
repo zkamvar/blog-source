@@ -86,7 +86,7 @@ publishDir = "../zkamvar.github.io"
     # Enable the contact form by entering your Formspree.io email
     email = "your@email.com"
 
-    about_us = "<p>I am a population geneticist, data scientist, plant pathologist, and R package developer working at the University of Nebraska-Lincoln.</p>"
+    about_us = "<p>I am a population geneticist, data scientist, plant pathologist, and R package developer working at Imperial College, London</p>"
     # copyright = "Copyright (c) 2015 - 2016, YourCompany; all rights reserved."
 
     # Format dates with Go's time formatting
@@ -114,7 +114,7 @@ publishDir = "../zkamvar.github.io"
     stackoverflow = "2752888/znk"
     researchgate = "Zhian_Kamvar"
     email = "zkamvar@gmail.com"
-    mobile = "+1 (541) 286-0187"
+    mobile = "+44 7444 840264"
 
 # Enable or disable top bar with social icons
 [params.topbar]

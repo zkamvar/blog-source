@@ -1,14 +1,16 @@
 ---
 title: "About"
-date: "2017-09-16"
+date: "2018-08-29"
 ---
 
-<img src="/images/meep.jpg" width=225 align="left" style="margin:0px 10px 0px 0px"> I am a computational biologist currently working a post-doctoral researcher in the lab of [Dr. Sydney E. Everhart][see] at the [Department of Plant Pathology at University of Nebraska-Lincoln][unl]. My research focus seeks to understand the mechanisms that drive the evolution of clonal plant pathogens. 
+<img src="/images/meep.jpg" width=225 align="left" style="margin:0px 10px 0px 0px"> I am a computational biologist currently working a post-doctoral researcher in [Thibaut Jombart's][tj] group at Imperial College in London, UK where I focus on developing tools and resources for outbreak response analytics. 
 
 I grew up in Cupertino, CA, but got my undergraduate degree in Biology at [Truman State University][tsu] in Kirksville, MO where I had a research opportunity to work on understanding the [regulation of shoot apical meristem development in maize][1]. After graduation, I spent three years teaching and making music in South Korea before going back to the US to pursue my graduate education.
 
 My Ph. D. is from the [Department of Botany and Plant Pathology][bpp] at [Oregon State University][osu] where I worked in the lab of [Dr. Nik Grünwald][nik]. [My dissertation][diss] focuses on my development of computational tools for analyzing clonal populations in the R package [*poppr*][poppr].
 
+From 2017-01--2018-04, I was a postdoc in the lab of [Dr. Sydney E. Everhart][see] at the [Department of Plant Pathology at University of Nebraska-Lincoln][unl]. My research focus sought to understand the populations structure and dynamics of the plant pathogen *Sclerotinia sclerotiorum*. 
+ 
 
 Radio
 -----
@@ -30,7 +32,7 @@ Beyond Science and Communication, these are a few of my favorite things
  - listening to and playing music (I enjoy [several forms][lastfm])
  - baking
  - cats
- - science fiction and literature
+ - science fiction and literature you can [stalk me on goodreads if you like](https://www.goodreads.com/user/show/6179714-zinc-potassium)
 
 
 
@@ -48,3 +50,4 @@ Beyond Science and Communication, these are a few of my favorite things
 [unl]: http://plantpathology.unl.edu/
 [tsu]: http://www.truman.edu/
 [nik]: http://grunwaldlab.cgrb.oregonstate.edu
+[tj]: https://thibautjombart.netlify.com
