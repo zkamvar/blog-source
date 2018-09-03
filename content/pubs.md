@@ -7,6 +7,11 @@ date: "2017-09-24"
 
 > These publications have not yet been peer-reviewed, but have been submitted.
 
+Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donnelly CA, and Jombart T epiflows: an R package for risk assessment of travel-related spread of disease \[version 1; referees: awaiting peer review\]. F1000Research 2018, 7:1374 ([doi: 10.12688/f1000research.16032.1](https://doi.org/10.12688/f1000research.16032.1))
+
+ -  software:  https://github.com/reconhub/epiflows
+ -  doi:       [10.5281/zenodo.1401806](http://doi.org/10.5281/zenodo.1401806)
+
 **Kamvar ZN**, Everhart SE. (2018) Something in the agar does not compute: On the discriminatory power of mycelial compatibility in *Sclerotinia sclerotiorum*. *PeerJ Preprints* 6:e26670v1 doi: [10.7287/peerj.preprints.26670v1](https://doi.org/10.7287/peerj.preprints.26670v1)
 
  -  simulations:  https://github.com/everhartlab/sclerotinia-review-2017           
