@@ -1,6 +1,5 @@
 ---
 title: "Scholarly Publications"
-date: "2018-11-30"
 ---
 
 # Pre-Prints
@@ -13,11 +12,13 @@ Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donn
  -  doi:       [10.5281/zenodo.1401806](http://doi.org/10.5281/zenodo.1401806)
 
 Pannullo A, **Kamvar ZN**, Miorini TJJ, Steadman JR, Everhart SE. (2018) Genetic variation and structure of *Sclerotinia sclerotiorum* populations from soybean in Brazil. *PeerJ Preprints* 6:e26600v1 doi: [10.7287/peerj.preprints.26600v1](https://doi.org/10.7287/peerj.preprints.26600v1)
+<div style="color: #808080;"><b>Status: Submitted to Tropical Plant Pathology; Peer Reviewed; Awaiting Final Decision</b></div>
 
  -  data/analysis:  https://github.com/everhartlab/brazil-sclerotinia-2017         
  -  doi:            [10.17605/OSF.IO/E4UPH](https://doi.org/10.17605/OSF.IO/E4UPH) 
 
-Miorini TJJ, **Kamvar ZN**, Higgins R, Raetano CG, Steadman JR, Everhart SE. (2018) Vari- ation in pathogen aggression and cultivar performance against *Sclerotinia sclerotiorum* in soybean and dry bean from Brazil and the U.S. *PeerJ Preprints* 6:e26622v1 doi: [10.7287/peerj.preprints.26622v1](https://doi.org/10.7287/peerj.preprints.26622v1)
+Miorini TJJ, **Kamvar ZN**, Higgins R, Raetano CG, Steadman JR, Everhart SE. (2018) Vari- ation in pathogen aggression and cultivar performance against *Sclerotinia sclerotiorum* in soybean and dry bean from Brazil and the U.S. *PeerJ Preprints* 6:e26622v1 doi: [10.7287/peerj.preprints.26622v1](https://doi.org/10.7287/peerj.preprints.26622v1)    
+<div style="color: #808080;"><b>Status: Submitted as technical note to Tropical Plant Pathology</b></div>
 
  -  data/analysis:  https://github.com/everhartlab/SscPhenoProj                    
  -  doi:            [10.17605/OSF.IO/2X7FC](https://doi.org/10.17605/OSF.IO/2X7FC) 
