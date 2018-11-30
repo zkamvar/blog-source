@@ -1,21 +1,16 @@
 ---
 title: "Scholarly Publications"
-date: "2017-09-24"
+date: "2018-11-30"
 ---
 
 # Pre-Prints
 
 > These publications have not yet been peer-reviewed, but have been submitted.
 
-Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donnelly CA, and Jombart T epiflows: an R package for risk assessment of travel-related spread of disease \[version 1; referees: awaiting peer review\]. F1000Research 2018, 7:1374 ([doi: 10.12688/f1000research.16032.1](https://doi.org/10.12688/f1000research.16032.1))
+Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donnelly CA, and Jombart T epiflows: an R package for risk assessment of travel-related spread of disease \[version 1;  referees: 2 approved with reservations\]. F1000Research 2018, 7:1374 ([doi: 10.12688/f1000research.16032.1](https://doi.org/10.12688/f1000research.16032.1))
 
  -  software:  https://github.com/reconhub/epiflows
  -  doi:       [10.5281/zenodo.1401806](http://doi.org/10.5281/zenodo.1401806)
-
-**Kamvar ZN**, Everhart SE. (2018) Something in the agar does not compute: On the discriminatory power of mycelial compatibility in *Sclerotinia sclerotiorum*. *PeerJ Preprints* 6:e26670v1 doi: [10.7287/peerj.preprints.26670v1](https://doi.org/10.7287/peerj.preprints.26670v1)
-
- -  simulations:  https://github.com/everhartlab/sclerotinia-review-2017           
- -  doi:          [10.17605/OSF.IO/B8VD3/](https://doi.org/10.17605/OSF.IO/B8VD3/) 
 
 Pannullo A, **Kamvar ZN**, Miorini TJJ, Steadman JR, Everhart SE. (2018) Genetic variation and structure of *Sclerotinia sclerotiorum* populations from soybean in Brazil. *PeerJ Preprints* 6:e26600v1 doi: [10.7287/peerj.preprints.26600v1](https://doi.org/10.7287/peerj.preprints.26600v1)
 
@@ -28,6 +23,12 @@ Miorini TJJ, **Kamvar ZN**, Higgins R, Raetano CG, Steadman JR, Everhart SE. (20
  -  doi:            [10.17605/OSF.IO/2X7FC](https://doi.org/10.17605/OSF.IO/2X7FC) 
 
 # Peer-Reviewed Publications
+
+**Kamvar ZN**, Everhart SE. (2018) Something in the agar does not compute: on the discriminatory power of mycelial compatibility in *Sclerotinia sclerotiorum*. *Tropical Plant Pathology*  doi: [10.1007/s40858-018-0263-8](https://doi.org/10.1007/s40858-018-0263-8)    
+[Download the un-formatted PDF](https://github.com/everhartlab/sclerotinia-review-2017/raw/master/manuscript/review.pdf)
+
+ -  simulations:  https://github.com/everhartlab/sclerotinia-review-2017           
+ -  doi:          [10.17605/OSF.IO/B8VD3](https://doi.org/10.17605/OSF.IO/B8VD3) 
 
 **Kamvar ZN**, Amaradasa BS, Jhala R, McCoy S, Steadman JR, Everhart SE. (2017) Population structure and phenotypic variation of *Sclerotinia sclerotiorum* from dry bean (*Phaseolus vulgaris*) in the United States. *PeerJ* 5:e4152 doi: [10.7717/peerj.4152](https://doi.org/10.7717/peerj.4152)
 
