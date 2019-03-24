@@ -6,24 +6,27 @@ title: "Scholarly Publications"
 
 > These publications have not yet been peer-reviewed, but have been submitted.
 
-Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donnelly CA, and Jombart T epiflows: an R package for risk assessment of travel-related spread of disease \[version 1;  referees: 2 approved with reservations\]. F1000Research 2018, 7:1374 ([doi: 10.12688/f1000research.16032.1](https://doi.org/10.12688/f1000research.16032.1))
+**Kamvar ZN**, Cai J, Pulliam JRC, Schumacher J, Jombart T. Epidemic curves made easy using the R package *incidence* [version 1; referees: awaiting peer review]. F1000Research 2019, 8:139. (doi: [10.12688/f1000research.18002.1](https://doi.org/10.12688/f1000research.18002.1)).
+
+ - software: https://github.com/reconhub/aweek
+ - doi:      [10.5281/zenodo.1404718](https://doi.org/10.5281/zenodo.1404718)
+
+# Peer-Reviewed Publications
+
+Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donnelly CA, and Jombart T epiflows: an R package for risk assessment of travel-related spread of disease \[version 1;  referees: 2 approved with reservations\]. F1000Research 2018, 7:1374 (doi: [10.12688/f1000research.16032.1](https://doi.org/10.12688/f1000research.16032.1))
 
  -  software:  https://github.com/reconhub/epiflows
  -  doi:       [10.5281/zenodo.1401806](http://doi.org/10.5281/zenodo.1401806)
 
-Pannullo A, **Kamvar ZN**, Miorini TJJ, Steadman JR, Everhart SE. (2018) Genetic variation and structure of *Sclerotinia sclerotiorum* populations from soybean in Brazil. *PeerJ Preprints* 6:e26600v1 doi: [10.7287/peerj.preprints.26600v1](https://doi.org/10.7287/peerj.preprints.26600v1)
-<div style="color: #808080;"><b>Status: Submitted to Tropical Plant Pathology; Peer Reviewed; Awaiting Final Decision</b></div>
-
- -  data/analysis:  https://github.com/everhartlab/brazil-sclerotinia-2017         
- -  doi:            [10.17605/OSF.IO/E4UPH](https://doi.org/10.17605/OSF.IO/E4UPH) 
-
-Miorini TJJ, **Kamvar ZN**, Higgins R, Raetano CG, Steadman JR, Everhart SE. (2018) Vari- ation in pathogen aggression and cultivar performance against *Sclerotinia sclerotiorum* in soybean and dry bean from Brazil and the U.S. *PeerJ Preprints* 6:e26622v1 doi: [10.7287/peerj.preprints.26622v1](https://doi.org/10.7287/peerj.preprints.26622v1)    
-<div style="color: #808080;"><b>Status: Submitted as technical note to Tropical Plant Pathology</b></div>
+Miorini TJJ, **Kamvar ZN**, Higgins R, Raetano CG, Steadman JR, Everhart SE. (2018) Variation in pathogen aggression and cultivar performance against *Sclerotinia sclerotiorum* in soybean and dry bean from Brazil and the U.S. *Tropical Plant Pathology* doi: [10.1007/s40858-018-00273-w](https://doi.org/10.1007/s40858-018-00273-w)
 
  -  data/analysis:  https://github.com/everhartlab/SscPhenoProj                    
  -  doi:            [10.17605/OSF.IO/2X7FC](https://doi.org/10.17605/OSF.IO/2X7FC) 
 
-# Peer-Reviewed Publications
+Pannullo A, **Kamvar ZN**, Miorini TJJ, Steadman JR, Everhart SE. (2018) Genetic variation and structure of *Sclerotinia sclerotiorum* populations from soybean in Brazil. *Tropical Plant Pathology* doi: [10.1007/s40858-018-0266-5](https://doi.org/10.1007/s40858-018-0266-5).
+
+ -  data/analysis:  https://github.com/everhartlab/brazil-sclerotinia-2017         
+ -  doi:            [10.17605/OSF.IO/E4UPH](https://doi.org/10.17605/OSF.IO/E4UPH) 
 
 **Kamvar ZN**, Everhart SE. (2018) Something in the agar does not compute: on the discriminatory power of mycelial compatibility in *Sclerotinia sclerotiorum*. *Tropical Plant Pathology*  doi: [10.1007/s40858-018-0263-8](https://doi.org/10.1007/s40858-018-0263-8)    
 [Download the un-formatted PDF](https://github.com/everhartlab/sclerotinia-review-2017/raw/master/manuscript/review.pdf)
