@@ -20,22 +20,27 @@ publishDir = "../zkamvar.github.io"
 [[menu.main]]
     name = "Home"
     url  = "/"
-    weight = 1
+    weight = 4
+
+[[menu.main]]
+    name = "CV"
+    url = "https://github.com/zkamvar/CV/blob/master/ZNK_CV.pdf"
+    weight = 5
 
 [[menu.main]]
     name = "Blog"
     url  = "/blog/"
-    weight = 2
+    weight = 1
 
 [[menu.main]]
     name = "About"
     url  = "/about"
-    weight = 3
+    weight = 2
 
 [[menu.main]]
     name = "Publications"
     url  = "/pubs"
-    weight = 4
+    weight = 3
 
 # Top bar social links menu
 
