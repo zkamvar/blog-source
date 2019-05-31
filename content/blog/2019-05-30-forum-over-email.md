@@ -14,8 +14,8 @@ tags:
 ---
 
 My package, poppr, has been on CRAN for over six years now and it has received
-over 400 citations and over 70,000 downloads from the RStudio cran mirror. I can
-think of three reasons why this package has been successful:
+more than 400 citations and just north of 70,000 downloads from the RStudio
+cran mirror. I can think of three reasons why this package has been successful:
 
  1. Our lab gave several workshops using our package over the years
  2. We have written extensive documentation with both [web
