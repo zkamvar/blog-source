@@ -37,7 +37,9 @@ https protocol] for various reasons, but partially because this is the easiest
 to set up. The problem is that if you have 2-factor authentication set up, even
 if you have a [credential helper] to cache your password, that's only one part
 of the 2-factor authentication. You will still need to authenticate yourself
-every single time you pull and push. 
+every single time you pull and push, which causes issues like this: 
+
+![screencapture of git push failing authentication](../../img/git-push-fail.gif)
 
 To solve this, we told our members to [use the ssh protocol]. This is a bit more
 involved because the user has to interact with the command line, but there are
@@ -46,6 +48,25 @@ Jenny Bryan]. When you have an SSH key, you are telling GitHub that you trust
 that particular machine and don't need any secondary authentication if code is
 coming from there. One of the things I like about SSH keys is the fact that you
 can remove them from GitHub if your laptop gets stolen/repurposed.
+
+Of course, if your repositories were already cloned using the https method, then
+you need to change the remote URL to use SSH. Copy and paste this code to change
+an https remote to SSH (assuming that you only need to change the origin remote):
+
+```sh
+git remote get-url origin \
+| sed 's_https://github.com/_git@github.com:_' \
+| xargs git remote set-url origin
+```
+
+If you don't use git on the command line, you can still do this within R using
+the git2r package:
+
+```r
+myurl <- git2r::remote_url(remote = "origin")
+newurl <- sub("https://github.com/", "git@github.com:", myurl)
+git2r::remote_set_url(name = "origin", url = newurl)
+```
 
 ### Make sure you have your backups
 
