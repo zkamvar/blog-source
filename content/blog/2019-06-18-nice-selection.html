@@ -1,0 +1,65 @@
+---
+title: nice selection
+author: Zhian N. Kamvar
+date: '2019-06-18'
+slug: nice-selection
+categories:
+  - example
+  - R
+tags:
+  - tidyverse
+  - tidyselect
+  - purrr
+  - R
+  - functions
+  - programming
+---
+
+
+
+<p>I started writing in R <a href="https://twitter.com/pete_stmarie/status/748195937890115585">before the tidyverse became a thing</a>
+and I never really had to think about non-standard evaluation when writing
+functions. Those days are long past and I’ve recently struggled with the
+challenge when writing functions for <a href="https://github.com/R4EPI">the R4EPIs project</a>,
+which would stick out like ugly little trolls along side tidyverse functions.</p>
+<p>One of my biggest struggles was trying to figure out how, excactly to select a
+varaible from a user as either a character string or a bare variable. I had only
+known about <code>rlang::enquo()</code> and <code>rlang::sym()</code>, but I thought I had to use one
+or the other.</p>
+<p>I had liked <code>tidyselect::vars_select()</code> because it gave me characters that I
+could use on my data frame columns, and it worked really will with the dots:</p>
+<pre class="r"><code>f &lt;- function(.df, ...) {
+  tidyselect::vars_select(colnames(.df), ...)
+}
+f(iris, tidyselect::starts_with(&quot;Sepal&quot;))</code></pre>
+<pre><code>##   Sepal.Length    Sepal.Width 
+## &quot;Sepal.Length&quot;  &quot;Sepal.Width&quot;</code></pre>
+<pre class="r"><code>f(iris, Sepal.Width)</code></pre>
+<pre><code>##   Sepal.Width 
+## &quot;Sepal.Width&quot;</code></pre>
+<pre class="r"><code>f(iris, &quot;Sepal.Width&quot;)</code></pre>
+<pre><code>##   Sepal.Width 
+## &quot;Sepal.Width&quot;</code></pre>
+<p>But when I would try it with specific arguments, it would scold me if the data
+weren’t in character form:</p>
+<pre class="r"><code>f &lt;- function(.df, var) {
+  tidyselect::vars_select(colnames(.df), var)
+}
+f(iris, Sepal.Width)</code></pre>
+<pre><code>## Error in .f(.x[[i]], ...): object &#39;Sepal.Width&#39; not found</code></pre>
+<pre class="r"><code>f(iris, &quot;Sepal.Width&quot;)</code></pre>
+<pre><code>##   Sepal.Width 
+## &quot;Sepal.Width&quot;</code></pre>
+<p>I recently found that I could use <code>!! enquo(var)</code> to allow the user to input
+either a character or a bare variable:</p>
+<pre class="r"><code>library(&quot;rlang&quot;)
+f &lt;- function(.df, var) {
+  tidyselect::vars_select(colnames(.df), !! enquo(var))
+}
+f(iris, Sepal.Width)</code></pre>
+<pre><code>##   Sepal.Width 
+## &quot;Sepal.Width&quot;</code></pre>
+<pre class="r"><code>f(iris, &quot;Sepal.Width&quot;)</code></pre>
+<pre><code>##   Sepal.Width 
+## &quot;Sepal.Width&quot;</code></pre>
+<p>And now it finally makes sense!</p>
