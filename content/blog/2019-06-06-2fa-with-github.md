@@ -11,6 +11,7 @@ tags:
   - 2fa
   - https
   - ssh
+banner: img/git-push-fail.gif
 ---
 
 Since the end of 2018, I've been a part of a collaboration between [RECON] and
@@ -39,7 +40,7 @@ if you have a [credential helper] to cache your password, that's only one part
 of the 2-factor authentication. You will still need to authenticate yourself
 every single time you pull and push, which causes issues like this: 
 
-![screencapture of git push failing authentication](../../img/git-push-fail.gif)
+<img align="center" src="../../img/git-push-fail.gif" title="Screencapture of git push failing authentication" width='100%'/>
 
 To solve this, we told our members to [use the ssh protocol]. This is a bit more
 involved because the user has to interact with the command line, but there are
