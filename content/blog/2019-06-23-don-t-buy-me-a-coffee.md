@@ -41,6 +41,7 @@ effort to release[^3], but others, like [poppr version 2.8.0] and [poppr version
 TODO: 
 1. open source is never developed for free
 2. it's important to pay people for their work
+2.1 some people have a digital tip jar on their pages (for coffee!)
 3. charityware exists because developers are already paid through different means (vim)
 4. I am donating and I want you to, too.
 
