@@ -2,16 +2,14 @@
 title: "Scholarly Publications"
 ---
 
-# Pre-Prints
-
-> These publications have not yet been peer-reviewed, but have been submitted.
-
-**Kamvar ZN**, Cai J, Pulliam JRC, Schumacher J, Jombart T. Epidemic curves made easy using the R package *incidence* [version 1; referees: awaiting peer review]. F1000Research 2019, 8:139. (doi: [10.12688/f1000research.18002.1](https://doi.org/10.12688/f1000research.18002.1)).
-
- - software: https://github.com/reconhub/aweek
- - doi:      [10.5281/zenodo.1404718](https://doi.org/10.5281/zenodo.1404718)
-
 # Peer-Reviewed Publications
+
+Polonsky JA, Baidjoe A, **Kamvar, ZN** Cori A, Durski K, Edmunds WJ, Eggo RM, Funk S, Kaiser L, Keating P, Polain de Waroux O, Marks M, Moraga P, Morgan O, Nouvellet P, Ratnayake R, Roberts CH, Whitworth J, & Jombart T (2019). Outbreak analytics: A developing data science for informing the response to emerging pathogens. *Philosophical Transactions of the Royal Society B: Biological Sciences*, 374(1776), 20180276. doi: [10.1098/rstb.2018.0276](https://doi.org/10.1098/rstb.2018.0276)
+
+**Kamvar ZN**, Cai J, Pulliam JRC, Schumacher J, Jombart T. Epidemic curves made easy using the R package *incidence* \[version 1; peer review: 1 approved, 2 approved with reservations\]. F1000Research 2019, 8:139. (doi: [10.12688/f1000research.18002.1](https://doi.org/10.12688/f1000research.18002.1)).
+
+ - software: https://github.com/reconhub/incidence
+ - doi:      [10.5281/zenodo.1404718](https://doi.org/10.5281/zenodo.1404718)
 
 Moraga P, Dorigatti I, **Kamvar ZN**, Piatkowski P, Toikkanen SE, Nagraj V, Donnelly CA, and Jombart T epiflows: an R package for risk assessment of travel-related spread of disease \[version 1;  referees: 2 approved with reservations\]. F1000Research 2018, 7:1374 (doi: [10.12688/f1000research.16032.1](https://doi.org/10.12688/f1000research.16032.1))
 
